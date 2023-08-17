@@ -1,33 +1,30 @@
 #include <stdio.h>
 
-// Fatorial recursivo:
-float fatorial(int n){
-    if (n >= 1) {
-        return n * fatorial(n - 1);
-    } else {
-        return 1;
-    }
+void swap(int *v, int len, int totalLen) {
+    int temp, a;
+    a = totalLen - len;
+    temp = v[a];
+    v[a] = v[totalLen - a - 1];
+    v[len - 1] = temp;
 }
 
-float xToTheNth(int x, int n){
-    if (n == 0) {
-        return 1;
+int* inverteVetor(int *v, int len, int totalLen) {
+    if (len <= 1) { 
+        return v;
     } else {
-        return x * xToTheNth(x, n - 1);
-    }
-}
-
-float quartaQuestao(float x, float n) {
-    if (n == 0) {
-        return 1;
-    } else if (n == 1) {
-        return x + quartaQuestao(x, n - 1);
-    } else {
-        return xToTheNth(x, n)/fatorial(n) + quartaQuestao(x, n - 1);
+        swap(v, len, totalLen);
+        return inverteVetor(v, len - 1, totalLen);
     }
 }
 
 int main(void) {
-    printf("%f\n", quartaQuestao(5, 4));
+    int v[6] = {1, 5, 2, 7, 6, 4};
+    int len = 6;
+    inverteVetor(v, len, len);
+    for(int i = 0; i < len; i++){
+        printf("%d, ", v[i]);
+    }
+    printf("\n");
+
     return 0;
 }
