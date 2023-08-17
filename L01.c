@@ -16,9 +16,18 @@ int somaImpares(int n){
     }
 }
 
+int xToTheNth(int x, int n){
+    if (n == 0) {
+        return 1;
+    } else {
+        return x * xToTheNth(x, n - 1);
+    }
+}
+
 int main(void) {
     int output = 0;
     printf("%d\n", produto(8, 12));
     printf("%d\n", somaImpares(4));
+    printf("%d\n", xToTheNth(5, 4));
     return 0;
 }
