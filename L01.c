@@ -95,6 +95,12 @@ int main(void) {
 }
 */
 
+// Exercício 08
+int polinomio(int x, int n, int c[]){
+  if (n == 0) return c[0];
+  return polinomio(x, n-1, c) * x + c[n];
+}
+
 int main(void) {
     printf("Fatorial: %.0f\n", fatorial(5));
     printf("Exercício 01: %d\n", produto(8, 12));
@@ -118,5 +124,11 @@ int main(void) {
     printf("Exercício 06: %d\n", encontraMaior(v, len - 1));
     printf("Exercício 07: %d\n", repeteNemX(5, 554055));
 
+    printf("Exercício 08:\n");
+    int c[4] = {3, 5, 3, 2};
+    int x = 10;
+    int n = 3;
+    printf("P(x = %d, n = %d) = %d\n", x, n, polinomio(x, n, c));
+    printf("Coeficientes: [%d, %d, %d, %d]\n", c[0], c[1], c[2], c[3]);
     return 0;
 }
