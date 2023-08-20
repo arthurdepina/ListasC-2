@@ -63,8 +63,13 @@ void inverteVetor(int *v, int start, int end) {
 }
 
 //Exercício 06
-int maiorElementoDoVetor(int *v, int n){
-    
+int maiorEntreXY(int x, int y){
+    if (x >= y){ return x; } else {return y; }
+}
+
+int encontraMaior(int *v, int n){
+    if (n == 0) { return v[0]; }
+    return maiorEntreXY(v[n], encontraMaior(v, n - 1));
 }
 
 // Exercício 07
@@ -90,7 +95,7 @@ int main(void) {
     }
     printf("\n");
 
-
+    printf("Exercício 06: %d\n", encontraMaior(v, len - 1));
 
     return 0;
 }
