@@ -46,7 +46,6 @@ float quartaQuestao(float x, float n) {
 }
 
 // Exercícios 05
-
 void swap(int *v, int start, int end) {
     int temp;
     temp = v[start];
@@ -63,20 +62,35 @@ void inverteVetor(int *v, int start, int end) {
     }
 }
 
+//Exercício 06
+int maiorElementoDoVetor(int *v, int n){
+    
+}
+
+// Exercício 07
+int repeteXemY(int y, int x){}
+
 int main(void) {
-    printf("%.0f\n", fatorial(5));
-    printf("%d\n", produto(8, 12));
-    printf("%d\n", somaImpares(4));
-    printf("%.0f\n", xToTheNth(5, 4));
-    printf("%.4f\n", quartaQuestao(5, 4));
+    printf("Fatorial: %.0f\n", fatorial(5));
+    printf("Exercício 01: %d\n", produto(8, 12));
+    printf("Exercício 02: %d\n", somaImpares(4));
+    printf("Exercício 03: %.0f\n", xToTheNth(5, 4));
+    printf("Exercício 04: %.4f\n", quartaQuestao(5, 4));
 
     int v[6] = {1, 5, 2, 7, 6, 4};
     int len = 6;
     inverteVetor(v, 0, len - 1);
+    printf("Exercício 05: ");
     for(int i = 0; i < len; i++){
-        printf("%d, ", v[i]);
+        if (i == len - 1){
+            printf("%d", v[i]);
+        } else {
+            printf("%d, ", v[i]);
+        }
     }
     printf("\n");
+
+
 
     return 0;
 }
