@@ -73,7 +73,27 @@ int encontraMaior(int *v, int n){
 }
 
 // Exercício 07
-int repeteXemY(int y, int x){}
+int repeteNemX(int n, int x){
+    if (x == 0) {
+        return 0;
+    }
+    if (x%10 == n) return 1 + repeteNemX(n, x/10);
+    return 0 + repeteNemX(n, x/10);
+}
+
+/*
+Solução do professor:
+int conta_ocorrencia(int n, int k){
+  if (n == 0) return 0;
+  return conta_ocorrencia(n/10, k) + (n%10 == k);
+}
+int main(void) {
+  printf("número de ocorrencias: %d\n", conta_ocorrencia(201920267, 2));
+  printf("número de ocorrencias: %d\n", conta_ocorrencia(55555054, 5));
+
+  return 0;
+}
+*/
 
 int main(void) {
     printf("Fatorial: %.0f\n", fatorial(5));
@@ -96,6 +116,7 @@ int main(void) {
     printf("\n");
 
     printf("Exercício 06: %d\n", encontraMaior(v, len - 1));
+    printf("Exercício 07: %d\n", repeteNemX(5, 554055));
 
     return 0;
 }
