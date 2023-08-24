@@ -13,6 +13,7 @@ int mdc_2(int x, int y){
 	if (x%2 != 0 && y%2 == 0) return mdc_2(x, y/2);
 	if (x%2 != 0 && y%2 != 0 && x > y) return mdc_2((x-y)/2, y);
 	if (x%2 != 0 && y%2 != 0 && x < y) return mdc_2(x, (y-x)/2);
+	return 0;
 }
 
 int main(){
