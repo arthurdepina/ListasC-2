@@ -18,8 +18,8 @@ int mdc_2(int x, int y){
 
 int potencia(int x, int n){
 	if(n == 0) return 1;
-	if(n > 0 && n%2 == 0) return potencia(x, n/2) * potencia(x, n/2);
-	if(n > 0 && n%2 != 0) return x * potencia(x, n/2) * potencia(x, n/2);
+	if(n > 0 && n%2 == 0) return potencia(potencia(x, n/2), 2);
+	if(n > 0 && n%2 != 0) return x*potencia(potencia(x, (n-1)/2), 2);
 	return 0;
 }
 
