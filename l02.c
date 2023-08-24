@@ -16,6 +16,13 @@ int mdc_2(int x, int y){
 	return 0;
 }
 
+int potencia(int x, int n){
+	if(n == 0) return 1;
+	if(n > 0 && n%2 == 0) return potencia(potencia(x, n/2), 2);
+	if(n > 0 && n%2 != 0) return x*potencia(potencia(x, (n-1)/2), 2);
+	return 0;
+}
+
 int main(){
 	printf("%d\n", mdc(270, 192));
 	printf("%d\n", mdc(35, 10));
@@ -26,6 +33,11 @@ int main(){
 	printf("%d\n", mdc_2(35, 10));
 	printf("%d\n", mdc_2(10, 15));
 	printf("%d\n", mdc_2(31, 2));
+	printf("==================\n");
+	printf("%d\n", potencia(2, 3));
+	printf("%d\n", potencia(3, 4));
+	printf("%d\n", potencia(8, 0));
+	printf("%d\n", potencia(9, 3));
 	return 0;
 }
 
