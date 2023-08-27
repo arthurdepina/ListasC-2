@@ -23,6 +23,11 @@ int potencia(int x, int n){
 	return 0;
 }
 
+int coef_binomial(int n, int m){
+	if(n == m || m == 0) return 1;
+	return coef_binomial(n - 1, m) + coef_binomial(n - 1, m - 1);
+}
+  
 int main(){
 	printf("%d\n", mdc(270, 192));
 	printf("%d\n", mdc(35, 10));
@@ -38,6 +43,11 @@ int main(){
 	printf("%d\n", potencia(3, 4));
 	printf("%d\n", potencia(8, 0));
 	printf("%d\n", potencia(9, 3));
+	printf("==================\n");
+	printf("%d\n", coef_binomial(10, 8));
+	printf("%d\n", coef_binomial(42, 40));
+	printf("%d\n", coef_binomial(24, 20));
+	printf("%d\n", coef_binomial(4, 2));
 	return 0;
 }
 
