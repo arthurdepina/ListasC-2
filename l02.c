@@ -1,5 +1,13 @@
 #include <stdio.h>
 
+void exibir_vetor(int *v, int len){
+	for (int i = 0; i < len; i++){
+		if (i == 0) printf("[");
+		if (i == len - 1) printf("%d]", v[i]);
+		else printf("%d, ", v[i]);
+	}
+}
+
 int mdc(int x, int y){
 	if (y <= x && x%y == 0) return y;
 	if (x < y) return mdc(y, x);
@@ -27,8 +35,13 @@ int coef_binomial(int n, int m){
 	if(n == m || m == 0) return 1;
 	return coef_binomial(n - 1, m) + coef_binomial(n - 1, m - 1);
 }
+
+int max_bitonic(int *vetor, int len){
+
+}
   
 int main(){
+	/*
 	printf("%d\n", mdc(270, 192));
 	printf("%d\n", mdc(35, 10));
 	printf("%d\n", mdc(10, 15));
@@ -48,6 +61,23 @@ int main(){
 	printf("%d\n", coef_binomial(42, 40));
 	printf("%d\n", coef_binomial(24, 20));
 	printf("%d\n", coef_binomial(4, 2));
+	printf("==================\n");
+	*/
+	int vetor_a[] = {1, 3, 5, 7, 10, 12, 9, 8, 4, 2};
+	int vetor_b[] = {1, 5, 13, 17, 19, 20, 21, 22, 16, 14, 4, 2};
+	int vetor_c[] = {2, 4, 5, 8, 11, 3};
+	int vetor_d[] = {1, 3, 5, 7, 6, 4, 2};
+	int len_a = sizeof(vetor_a)/sizeof(vetor_a[0]);
+	int len_b = sizeof(vetor_b)/sizeof(vetor_b[0]);
+	int len_c = sizeof(vetor_c)/sizeof(vetor_c[0]);
+	int len_d = sizeof(vetor_d)/sizeof(vetor_d[0]);
+	exibir_vetor(vetor_a, len_a);
+	printf("\n");
+	exibir_vetor(vetor_b, len_b);
+	printf("\n");
+	exibir_vetor(vetor_c, len_c);
+	printf("\n");
+	exibir_vetor(vetor_d, len_d);
 	return 0;
 }
 
