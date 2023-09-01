@@ -43,7 +43,24 @@ bool se_subsequencia(int *s, int *a, int len_s, int len_a) {
 }
 
 bool se_segmento(int *s, int *a, int len_s, int len_a) {
-        bool output;
+        /*
+         * Procura um equivalente ao primeiro item. Se não encontra
+         * retorna false. Se encontra itera por len_s elementos em
+         * len_a para ver se todos os elementos seguintes condizem
+        */
+        int j = 0;
+        while (j < len_a) {
+                if (a[j] == s[0]){
+                        int k = 0;
+                        for (int i = j; i < len_s + j; i++) {
+                                if (s[k] != a[i]) return false;
+                                k++;
+                        }
+                        return true;
+                }
+                j++;
+        }
+        return false;
 }
 
 int main(){
@@ -68,11 +85,16 @@ int main(){
         int f[] = {1, 2, 3, 4, 5, 6, 7, 8};
         int size_e = sizeof(e) / sizeof(e[0]);
         int size_f = sizeof(f) / sizeof(f[0]);
-        printf("03 : %s\n", 
+        printf("03: %s\n", 
         se_subsequencia(e, f, size_e, size_f) ? "Subsequencia" : "Nao subsequencia");
 
-        print("==== 04 ====\n");
-        
+        printf("==== 04 ====\n");
+        int g[] = {4, 5, 6};
+        int h[] = {1, 2, 3, 4, 5, 6, 7, 8};
+        int size_g = sizeof(g) / sizeof(g[0]);
+        int size_h = sizeof(h) / sizeof(h[0]);
+        printf("04: %s\n", 
+        se_segmento(g, h, size_g, size_h) ? "Segmento" : "Nao segmento");
 
         return 0;
 }
