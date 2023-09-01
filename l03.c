@@ -24,22 +24,26 @@ int compara_sequencias(int *r, int *s, int len_r, int len_s){
         /* Comparando tamanhos */
         if (len_r < len_s) return -1;
         if (len_r > len_s) return -1;
-        return 0;                   // Se forem iguais
+        return 0;                     // Se forem iguais
 }
 
-bool se_subsequencia(int *s, int *a, int len_s, int len_a){
+bool se_subsequencia(int *s, int *a, int len_s, int len_a) {
         bool output;
-        int j = 0;    // s: 2 5 6 8    a: 1 2 3 4 5 6 7 8
+        int j = 0;
         for (int i = 0; i < len_s; i++) {
                 while (j < len_a) {
                        if (s[i] == a[j]) {
-                        output = true;
-                        break;
+                        output = true;  //  encontrou
+                        break;          // um equivalente
                        } else output = false; j++;
-                }
-                if (!output) return output;
+                }                            // nao encontrou
+                if (!output) return output;  //  equivalente
         }
         return true;
+}
+
+bool se_segmento(int *s, int *a, int len_s, int len_a) {
+        bool output;
 }
 
 int main(){
@@ -68,6 +72,7 @@ int main(){
         se_subsequencia(e, f, size_e, size_f) ? "Subsequencia" : "Nao subsequencia");
 
         print("==== 04 ====\n");
+        
 
         return 0;
 }
