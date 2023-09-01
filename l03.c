@@ -44,4 +44,7 @@ int main(){
         int size_d = sizeof(d) / sizeof(d[0]);
         printf("02: %d\n", compara_sequencias(c, d, size_c, size_d));
         return 0;
+
+        printf("==== 03 ====");
+        
 }
