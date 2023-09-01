@@ -63,6 +63,14 @@ bool se_segmento(int *s, int *a, int len_s, int len_a) {
         return false;
 }
 
+int conta_sub_seq(int *s, int len_s){
+        int current = s[0]; // 5
+        int count = 1;
+        for (int i = 1; i < len_s; i++)
+                if (s[i] != current) { current = s[i]; count++; }
+        return count;
+}
+
 int main(){
 
         printf("==== 01 ====\n");
@@ -95,6 +103,14 @@ int main(){
         int size_h = sizeof(h) / sizeof(h[0]);
         printf("04: %s\n", 
         se_segmento(g, h, size_g, size_h) ? "Segmento" : "Nao segmento");
+
+        printf("==== 05 ====\n");
+        int m[] = {5, 2, 2, 3, 4, 4, 4, 4, 4, 1, 1};
+        int size_m = sizeof(m) / sizeof(m[0]);
+        printf("05: %d\n", conta_sub_seq(m, size_m));
+        int n[] = {3, 3, -1, -1, -1, 12, 12, 12, 3, 3};
+        int size_n = sizeof(n) / sizeof(n[0]);
+        printf("05: %d\n", conta_sub_seq(n, size_n));
 
         return 0;
 }
