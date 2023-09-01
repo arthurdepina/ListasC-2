@@ -17,7 +17,7 @@ int compara_sequencias(int *r, int *s, int len_r, int len_s){
         if (len_r > len_s) controlador_loop = len_s;
         else controlador_loop = len_r;
         /* Comparando todos os elementos */
-        for (int i = 0; i < controlador_loop; i++){
+        for (int i = 0; i < controlador_loop; i++) {
                 if (r[i] < s[i]) return 1;
                 if (r[i] > s[i]) return -1;
         }
@@ -25,6 +25,21 @@ int compara_sequencias(int *r, int *s, int len_r, int len_s){
         if (len_r < len_s) return -1;
         if (len_r > len_s) return -1;
         return 0;                   // Se forem iguais
+}
+
+bool se_subsequencia(int *s, int *a, int len_s, int len_a){
+        bool output;
+        int j = 0;    // s: 2 5 6 8    a: 1 2 3 4 5 6 7 8
+        for (int i = 0; i < len_s; i++) {
+                while (j < len_a) {
+                       if (s[i] == a[j]) {
+                        output = true;
+                        break;
+                       } else output = false; j++;
+                }
+                if (!output) return output;
+        }
+        return true;
 }
 
 int main(){
@@ -43,8 +58,16 @@ int main(){
         int size_c = sizeof(c) / sizeof(c[0]);
         int size_d = sizeof(d) / sizeof(d[0]);
         printf("02: %d\n", compara_sequencias(c, d, size_c, size_d));
-        return 0;
 
-        printf("==== 03 ====");
-        
+        printf("==== 03 ====\n");
+        int e[] = {2, 5, 6, 8};
+        int f[] = {1, 2, 3, 4, 5, 6, 7, 8};
+        int size_e = sizeof(e) / sizeof(e[0]);
+        int size_f = sizeof(f) / sizeof(f[0]);
+        printf("03 : %s\n", 
+        se_subsequencia(e, f, size_e, size_f) ? "Subsequencia" : "Nao subsequencia");
+
+        print("==== 04 ====\n");
+
+        return 0;
 }
