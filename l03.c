@@ -136,5 +136,6 @@ int main(){
         int size_r = sizeof(r) / sizeof(r[0]);
         printf("06: %d\n", max_seq_cres(r, size_r));
 
+        printf("============\n");
         return 0;
 }
