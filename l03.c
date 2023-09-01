@@ -64,11 +64,24 @@ bool se_segmento(int *s, int *a, int len_s, int len_a) {
 }
 
 int conta_sub_seq(int *s, int len_s){
-        int current = s[0]; // 5
+        int current = s[0];
         int count = 1;
         for (int i = 1; i < len_s; i++)
                 if (s[i] != current) { current = s[i]; count++; }
-        return count;
+        return count; // Complexidade: O(n)
+}
+
+
+int max_seq_cres(int *s, int len_s){
+        int max = 1;
+        int count = 0;
+        for (int i = 1; i < len_s; i++){
+                if (s[i] > s[i - 1]){
+                        count++;
+                        if (count > max) max = count;
+                } else count = 1;
+        }
+        return max;
 }
 
 int main(){
@@ -111,6 +124,17 @@ int main(){
         int n[] = {3, 3, -1, -1, -1, 12, 12, 12, 3, 3};
         int size_n = sizeof(n) / sizeof(n[0]);
         printf("05: %d\n", conta_sub_seq(n, size_n));
+
+        printf("==== 06 ====\n");   
+        int p[] = {5, 10, 3, 2, 4, 7, 9, 8, 5};
+        int size_p = sizeof(p) / sizeof(p[0]);
+        printf("06: %d\n", max_seq_cres(p, size_p));
+        int q[] = {10, 8, 7, 5, 2};
+        int size_q = sizeof(q) / sizeof(q[0]);
+        printf("06: %d\n", max_seq_cres(q, size_q));
+        int r[] = {4, 4, 5, 6, 3, 2, 1};
+        int size_r = sizeof(r) / sizeof(r[0]);
+        printf("06: %d\n", max_seq_cres(r, size_r));
 
         return 0;
 }
