@@ -2,6 +2,13 @@
 #include <stdbool.h>
 
 void seg_consec(int *a, int len_a){
+    /*
+     * Procura dois números iguais e calcula a distância (d)
+     * entre eles. Em seguida, itera entre os dois números e
+     * a partir do segundo por d elementos. Se não encontra
+     * nenhum número diferente, essas sequências são segmentos
+     * consecutivos. Complexidade O(n^2) (?)
+    */
     bool iguais = false;
     int tamanho = 0;
     int dist = 0;
@@ -23,6 +30,8 @@ void seg_consec(int *a, int len_a){
     }
     if (!iguais) printf("Sem segmentos consecutivos.\n");
 }
+
+
 
 int main () {
     printf("====== 01 ======\n");
@@ -46,5 +55,9 @@ int main () {
     int e[] = {2, 3, 5, 2, 3, 6};
     int size_e = sizeof(e) / sizeof(e[0]);
     seg_consec(e, size_e);
+    
+    printf("==== 02 ====\n");
+
+
     return 0;
 }
