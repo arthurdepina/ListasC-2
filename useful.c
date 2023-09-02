@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 void exibir_vetor(int *v, int len){
 	for (int i = 0; i < len; i++){
