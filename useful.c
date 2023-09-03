@@ -26,3 +26,12 @@ int **alocar_matriz(int n_linhas, int n_colunas){
     }
     return matriz;
 }
+
+/*
+            Apenas para referenciar
+*/
+
+int * teste_retorna_array(int *s, int len_s){
+    s[len_s - 1] = 8888;
+	return s;
+}
