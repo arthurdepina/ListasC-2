@@ -102,11 +102,18 @@ int main () {
     
     printf("==== 03 ====\n");
     int g[] = {2, 4, 6, 8, 10, 12, 14, 16};
-    int h[] = {1, 3, 5, 7, 9, 11, 13, 15, 17};
+    int h[] = {1, 3, 5, 7, 9, 11, 13, 15};
     int m = sizeof(g) / sizeof(g[0]);
     int n = sizeof(h) / sizeof(h[0]);
     int *array; int len_array = m + n;
     array = junta_ordenadas(g, h, m, n);
-    exibir_vetor(array, len_array);
+    exibir_vetor(array, len_array); printf("\n");
+    int p[] = {18, 19};
+    int q[] = {3, 6, 7, 9, 11, 14, 15, 16};
+    int len_p = sizeof(p) / sizeof(p[0]);
+    int len_q = sizeof(q) / sizeof(q[0]);
+    int *array2; int len_array2 = len_p + len_q;
+    array2 = junta_ordenadas(p, q, len_p, len_q);
+    exibir_vetor(array2, len_array2); printf("\n");
     return 0;
 }
