@@ -60,8 +60,8 @@ int * junta_ordenadas(int *a, int *b, int len_a, int len_b){
     int contador_a = 0, contador_b = 0;
     int len = len_a + len_b;
     int *seq = (int *)malloc(len * sizeof(int));
-    for (int i = 0; i < len; i++){
-        if (a[contador_a] < b[contador_b]) {
+    for (int i = 0; i < len; i++) {
+        if ((a[contador_a] < b[contador_b] || contador_b == len_b) && contador_a != len_a) {
             seq[i] = a[contador_a]; contador_a++;
         } else {
             seq[i] = b[contador_b]; contador_b++;
