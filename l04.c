@@ -71,18 +71,21 @@ int * junta_ordenadas(int *a, int *b, int len_a, int len_b){
 }
 
 void tres_digitos(int a, int b, int c) {
-    int array [3] = {a, b, c};
-    for (int i = 0; i < 3; i++) {
-        if (i != 0) printf("\n");
-        for (int j = 0; j < 3; j++){
-            for (int k = 0; k < 3; k++){
-                if (j == 0 && k == 0) {
-                    printf("| %d %d %d |", array[i], array[j], array[k]);
+    if (a != b && b != c && c != a){
+        int array [3] = {a, b, c};
+        for (int i = 0; i < 3; i++) {
+            if (i != 0) printf("\n");
+            for (int j = 0; j < 3; j++){
+                for (int k = 0; k < 3; k++){
+                    if (j == 0 && k == 0) {
+                        printf("| %d %d %d |", array[i], array[j], array[k]);
+                    }
+                    printf(" %d %d %d |", array[i], array[j], array[k]);
                 }
-                printf(" %d %d %d |", array[i], array[j], array[k]);
             }
         }
     }
+
 }
 
 int main () {
@@ -132,7 +135,11 @@ int main () {
     exibir_vetor(array2, len_array2); printf("\n");
 
     printf("==== 04 ====\n");
-    tres_digitos(1, 2, 3);
+    tres_digitos(1, 2, 3); printf("\n");
+    tres_digitos(1, 2, 2); printf("\n");
+    tres_digitos(1, 1, 2); printf("\n");
+    tres_digitos(1, 2, 1); printf("\n");
+    tres_digitos(1, 1, 1); printf("\n");
 
     return 0;
 }
