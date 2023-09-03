@@ -126,7 +126,6 @@ int main () {
     int a[] = {7, 9, 5, 4, 5, 4, 8, 6};
     int size_a = sizeof(a) /  sizeof(a[0]);
     seg_consec(a, size_a);
-    /* Alguns testes
     printf("b) ");
     int b[] = {7, 9, 5, 4, 8, 5, 4, 8, 6};
     int size_b = sizeof(b) /  sizeof(b[0]);
@@ -143,7 +142,6 @@ int main () {
     int e[] = {2, 3, 5, 2, 3, 6};
     int size_e = sizeof(e) / sizeof(e[0]);
     seg_consec(e, size_e);
-    */
     
     printf("\n==== 02 ====\n");
     int f[] = {5, 2, -2, -7, 3, 14, 10, -3, 9, -6, 4, 1};
