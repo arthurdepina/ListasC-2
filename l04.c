@@ -70,6 +70,21 @@ int * junta_ordenadas(int *a, int *b, int len_a, int len_b){
     return seq;
 }
 
+void tres_digitos(int a, int b, int c) {
+    int array [3] = {a, b, c};
+    for (int i = 0; i < 3; i++) {
+        if (i != 0) printf("\n");
+        for (int j = 0; j < 3; j++){
+            for (int k = 0; k < 3; k++){
+                if (j == 0 && k == 0) {
+                    printf("| %d %d %d |", array[i], array[j], array[k]);
+                }
+                printf(" %d %d %d |", array[i], array[j], array[k]);
+            }
+        }
+    }
+}
+
 int main () {
     printf("====== 01 ======\n");
     printf("a) ");
@@ -115,5 +130,9 @@ int main () {
     int *array2; int len_array2 = len_p + len_q;
     array2 = junta_ordenadas(p, q, len_p, len_q);
     exibir_vetor(array2, len_array2); printf("\n");
+
+    printf("==== 04 ====\n");
+    tres_digitos(1, 2, 3);
+
     return 0;
 }

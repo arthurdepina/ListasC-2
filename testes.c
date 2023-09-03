@@ -3,27 +3,22 @@
 #include <stdlib.h>
 #include "useful.c"
 
-int * junta_ordenadas(int *a, int *b, int len_a, int len_b){
-    int contador_a = 0, contador_b = 0;
-    int len = len_a + len_b;
-    int *seq = (int *)malloc(len * sizeof(int));
-    for (int i = 0; i < len; i++) {
-        if ((a[contador_a] < b[contador_b] || contador_b == len_b) && contador_a != len_a) {
-            seq[i] = a[contador_a]; contador_a++;
-        } else {
-            seq[i] = b[contador_b]; contador_b++;
+void tres_digitos(int a, int b, int c) {
+    int array [3] = {a, b, c};
+    for (int i = 0; i < 3; i++) {
+        printf("\n");
+        for (int j = 0; j < 3; j++){
+            for (int k = 0; k < 3; k++){
+                if (j == 0 && k == 0) {
+                    printf("| %d %d %d |", array[i], array[j], array[k]);
+                }
+                printf(" %d %d %d |", array[i], array[j], array[k]);
+            }
         }
     }
-    return seq;
 }
 
 int main () {
-    int g[] = {2, 4, 6, 8, 10, 12, 14, 16};
-    int h[] = {1, 3, 5, 7, 9, 11, 13, 15, 17};
-    int m = sizeof(g) / sizeof(g[0]);
-    int n = sizeof(h) / sizeof(h[0]);
-    int *array; int len_array = m + n;
-    array = junta_ordenadas(g, h, m, n);
-    exibir_vetor(array, len_array);
+    tres_digitos(1, 2, 3);
     return 0;
 }
