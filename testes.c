@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
-#include <stdlib.h>
+#include <stdlib.h> 
 
 void tres_digitos(int a, int b, int c) {
     int array[3];
@@ -43,19 +43,22 @@ void tres_digitos(int a, int b, int c) {
     }
     if (size == 2){
         for (int i = 0; i < 2; i++) {
+            if (i != 0) printf("\n");
             for(int j = 0; j < 2; j++){
-                
+                if(j == 0) printf("| %d %d |", array[i], array[j]);
+                else printf(" %d %d |", array[i], array[j]);
             }
         }
     }
 }
 
 int main () {
-    tres_digitos(1, 2, 3); printf("\n");
-    tres_digitos(1, 2, 2); printf("\n");
-    tres_digitos(1, 1, 2); printf("\n");
-    tres_digitos(1, 2, 1); printf("\n");
-    tres_digitos(1, 1, 1); printf("\n");
-
+    printf("\n"); tres_digitos(1, 2, 3); printf("\n");
+    printf("\n"); tres_digitos(1, 2, 2); printf("\n");
+    printf("\n"); tres_digitos(4, 4, 6); printf("\n");
+    printf("\n"); tres_digitos(0, 1, 0); printf("\n");
+    printf("\n"); tres_digitos(1, 1, 1); printf("\n");
+    
+    printf("\n"); 
     return 0;
 }

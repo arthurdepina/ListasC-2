@@ -71,8 +71,32 @@ int * junta_ordenadas(int *a, int *b, int len_a, int len_b){
 }
 
 void tres_digitos(int a, int b, int c) {
-    if (a != b && b != c && c != a){
-        int array [3] = {a, b, c};
+    int array[3];
+    int size = 0;
+
+    if (a != b && b != c && c != a) {
+        array[0] = a;
+        array[1] = b;
+        array[2] = c;
+        size = 3;
+    } else if (a == b && b == c) {
+        printf("| %d %d %d |", a, a, a);
+        return;
+    } else if (a == b) {
+        array[0] = a;
+        array[1] = c;
+        size = 2;
+    } else if (b == c) {
+        array[0] = a;
+        array[1] = b;
+        size = 2;
+    } else if (a == c) {
+        array[0] = a;
+        array[1] = b;
+        size = 2;
+    }
+
+    if (size == 3){
         for (int i = 0; i < 3; i++) {
             if (i != 0) printf("\n");
             for (int j = 0; j < 3; j++){
@@ -85,11 +109,19 @@ void tres_digitos(int a, int b, int c) {
             }
         }
     }
-
+    if (size == 2){
+        for (int i = 0; i < 2; i++) {
+            if (i != 0) printf("\n");
+            for(int j = 0; j < 2; j++){
+                if(j == 0) printf("| %d %d |", array[i], array[j]);
+                else printf(" %d %d |", array[i], array[j]);
+            }
+        }
+    }
 }
 
 int main () {
-    printf("====== 01 ======\n");
+    printf("\n====== 01 ======\n");
     printf("a) ");
     int a[] = {7, 9, 5, 4, 5, 4, 8, 6};
     int size_a = sizeof(a) /  sizeof(a[0]);
@@ -113,12 +145,12 @@ int main () {
     seg_consec(e, size_e);
     */
     
-    printf("==== 02 ====\n");
+    printf("\n==== 02 ====\n");
     int f[] = {5, 2, -2, -7, 3, 14, 10, -3, 9, -6, 4, 1};
     int size_f = sizeof(f) / sizeof(f[0]);
     printf("%d\n", max_soma_seg(f, size_f));
     
-    printf("==== 03 ====\n");
+    printf("\n==== 03 ====\n");
     int g[] = {2, 4, 6, 8, 10, 12, 14, 16};
     int h[] = {1, 3, 5, 7, 9, 11, 13, 15};
     int m = sizeof(g) / sizeof(g[0]);
@@ -134,12 +166,15 @@ int main () {
     array2 = junta_ordenadas(p, q, len_p, len_q);
     exibir_vetor(array2, len_array2); printf("\n");
 
-    printf("==== 04 ====\n");
-    tres_digitos(1, 2, 3); printf("\n");
-    tres_digitos(1, 2, 2); printf("\n");
-    tres_digitos(1, 1, 2); printf("\n");
-    tres_digitos(1, 2, 1); printf("\n");
-    tres_digitos(1, 1, 1); printf("\n");
+    printf("\n==== 04 ====\n");
+    printf("\n"); tres_digitos(1, 2, 3); printf("\n");
+    printf("\n"); tres_digitos(1, 2, 2); printf("\n");
+    printf("\n"); tres_digitos(4, 4, 6); printf("\n");
+    printf("\n"); tres_digitos(0, 1, 0); printf("\n");
+    printf("\n"); tres_digitos(1, 1, 1); printf("\n");
+    
+    printf("\n"); 
+    return 0;
 
     return 0;
 }
