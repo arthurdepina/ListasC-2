@@ -27,6 +27,20 @@ int **alocar_matriz(int n_linhas, int n_colunas){
     return matriz;
 }
 
+int converter_p_binario(int n){
+    int resto;
+    int multi = 1;
+    int bin = 0;
+    while (n != 0) {
+        resto = n % 2;
+        resto = resto * multi;
+        n = n / 2;
+        multi *= 10;
+        bin = bin + resto;
+    }
+    return bin;
+}
+
 /*
             Apenas para referenciar
 */

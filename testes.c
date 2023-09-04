@@ -1,64 +1,23 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h> 
+#include <math.h>
 
-void tres_digitos(int a, int b, int c) {
-    int array[3];
-    int size = 0;
-
-    if (a != b && b != c && c != a) {
-        array[0] = a;
-        array[1] = b;
-        array[2] = c;
-        size = 3;
-    } else if (a == b && b == c) {
-        printf("| %d %d %d |", a, a, a);
-        return;
-    } else if (a == b) {
-        array[0] = a;
-        array[1] = c;
-        size = 2;
-    } else if (b == c) {
-        array[0] = a;
-        array[1] = b;
-        size = 2;
-    } else if (a == c) {
-        array[0] = a;
-        array[1] = b;
-        size = 2;
+int converter_p_binario(int n){
+    int resto;
+    int multi = 1;
+    int bin = 0;
+    while (n != 0) {
+        resto = n % 2;
+        resto = resto * multi;
+        n = n / 2;
+        multi *= 10;
+        bin = bin + resto;
     }
-
-    if (size == 3){
-        for (int i = 0; i < 3; i++) {
-            if (i != 0) printf("\n");
-            for (int j = 0; j < 3; j++){
-                for (int k = 0; k < 3; k++){
-                    if (j == 0 && k == 0) {
-                        printf("| %d %d %d |", array[i], array[j], array[k]);
-                    }
-                    printf(" %d %d %d |", array[i], array[j], array[k]);
-                }
-            }
-        }
-    }
-    if (size == 2){
-        for (int i = 0; i < 2; i++) {
-            if (i != 0) printf("\n");
-            for(int j = 0; j < 2; j++){
-                if(j == 0) printf("| %d %d |", array[i], array[j]);
-                else printf(" %d %d |", array[i], array[j]);
-            }
-        }
-    }
+    return bin;
 }
 
 int main () {
-    printf("\n"); tres_digitos(1, 2, 3); printf("\n");
-    printf("\n"); tres_digitos(1, 2, 2); printf("\n");
-    printf("\n"); tres_digitos(4, 4, 6); printf("\n");
-    printf("\n"); tres_digitos(0, 1, 0); printf("\n");
-    printf("\n"); tres_digitos(1, 1, 1); printf("\n");
-    
-    printf("\n"); 
+    printf("%d\n", converter_p_binario(1));
     return 0;
 }
