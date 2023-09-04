@@ -1,23 +1,28 @@
 #include <stdio.h>
-#include <stdbool.h>
-#include <stdlib.h> 
-#include <math.h>
+#include <string.h>
 
-int converter_p_binario(int n){
-    int resto;
-    int multi = 1;
-    int bin = 0;
-    while (n != 0) {
-        resto = n % 2;
-        resto = resto * multi;
-        n = n / 2;
-        multi *= 10;
-        bin = bin + resto;
+void printBinary(int n, char *str, int index) {
+    // Caso base: se o índice for igual a n, imprima a string e retorne
+    if (index == n) {
+        str[index] = '\0';  // Finalize a string
+        printf("%s\n", str);
+        return;
     }
-    return bin;
+
+    // Adicione '0' na posição atual e faça uma chamada recursiva para o próximo índice
+    str[index] = '0';
+    printBinary(n, str, index + 1);
+
+    // Adicione '1' na posição atual e faça uma chamada recursiva para o próximo índice
+    str[index] = '1';
+    printBinary(n, str, index + 1);
 }
 
-int main () {
-    printf("%d\n", converter_p_binario(1));
+int main() {
+    int n = 3;
+    char str[n + 1];  // +1 para o caractere nulo no final
+
+    printBinary(n, str, 0);
+
     return 0;
 }
