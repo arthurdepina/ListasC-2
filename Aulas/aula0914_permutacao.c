@@ -13,6 +13,7 @@ void mostra_vetores(int *v, int len){
 void permutacao(int v[], int n, int s[], int i){
     if (i >= n){
         mostra_vetores(s, n);
+        printf("\n");
     } else {
         for (int j = 0; j < n; j++) {
             if (!usado[j]) {
