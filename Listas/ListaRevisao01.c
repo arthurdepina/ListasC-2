@@ -117,6 +117,21 @@ int * junta_ordenadas(int *a, int *b, int len_a, int len_b)
     return seq;
 }
 
+// ex 09
+void n_binario(char *bin, int n, int atual){
+    if (atual == n) {
+        bin[atual]  =  '\0';
+        printf("%s\n", bin);
+        return;
+    }
+    
+    bin[atual] = '0';
+    n_binario(bin, n, atual+1);
+
+    bin[atual] = '1';
+    n_binario(bin, n, atual+1);
+}
+
 int main()
 {
 	printf("=====================01=====================\n");
@@ -182,7 +197,7 @@ int main()
 	int f[] = {5, 2, -2, -7, 3, 14, 10, -3, 9, -6, 4, 1};
 	int size_f = sizeof(f) / sizeof(f[0]);
 	printf("%d\n", max_soma_seg(f, size_f));
-	printf("=====================07=====================\n");
+	printf("=====================08=====================\n");
     int g[] = {2, 4, 6, 8, 10, 12, 14, 16};
     int h[] = {1, 3, 5, 7, 9, 11, 13, 15};
     int m = sizeof(g) / sizeof(g[0]);
@@ -197,4 +212,9 @@ int main()
     int *array2; int len_array2 = len_p + len_q;
     array2 = junta_ordenadas(p, q, len_p, len_q);
     exibir_vetor(array2, len_array2); printf("\n");
+	printf("=====================09=====================\n");
+    int tam_str = 3;
+    printf("Exemplo, n = %d:\n", tam_str - 1);
+    char str[tam_str + 1];
+    n_binario(str, tam_str, 0);
 }
