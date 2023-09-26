@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdbool.h>
 
 void exibir_vetor(int *v, int len){
 	for (int i = 0; i < len; i++){
@@ -219,9 +220,9 @@ int main()
 	printf("=====================08=====================\n");
 	int g[] = {2, 4, 6, 8, 10, 12, 14, 16};
 	int h[] = {1, 3, 5, 7, 9, 11, 13, 15};
-	int m = sizeof(g) / sizeof(g[0]);
-	int n = sizeof(h) / sizeof(h[0]);
-	int *array; int len_array = m + n;
+	int size_g = sizeof(g) / sizeof(g[0]);
+	int size_h = sizeof(h) / sizeof(h[0]);
+	int *array; int len_array = size_g + size_h;
 	array = junta_ordenadas(g, h, m, n);
 	exibir_vetor(array, len_array); printf("\n");
 	int p[] = {18, 19};
