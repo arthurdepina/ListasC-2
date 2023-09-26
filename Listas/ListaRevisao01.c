@@ -44,7 +44,19 @@ int conta_sub_seq(int *s, int len_s)		// Complexidade: O(n)
         return count;
 }
 
-
+// ex 05
+int max_seq_cres(int *s, int len_s)			// Complexidade: O(n)
+{
+        int max = 1;
+        int count = 0;
+        for (int i = 1; i < len_s; i++){
+                if (s[i] > s[i - 1]){
+                        count++;
+                        if (count > max) max = count;
+                } else count = 1;
+        }
+        return max;
+}
 
 int main()
 {
@@ -80,4 +92,10 @@ int main()
     int size_n = sizeof(n) / sizeof(n[0]);
     printf("04: %d\n", conta_sub_seq(n, size_n));
     printf("=====================05=====================\n");
+    int p[] = {5, 10, 3, 2, 4, 7, 9, 8, 5};
+    int size_p = sizeof(p) / sizeof(p[0]);
+    printf("05: %d\n", max_seq_cres(p, size_p));
+    int q[] = {10, 8, 7, 5, 2};
+    int size_q = sizeof(q) / sizeof(q[0]);
+    printf("05: %d\n", max_seq_cres(q, size_q));
 }
