@@ -101,6 +101,22 @@ int max_soma_seg(int *s, int len_s)
     return max;
 }
 
+// ex 08
+int * junta_ordenadas(int *a, int *b, int len_a, int len_b)
+{
+    int contador_a = 0, contador_b = 0;
+    int len = len_a + len_b;
+    int *seq = (int *)malloc(len * sizeof(int));
+    for (int i = 0; i < len; i++) {
+        if ((a[contador_a] < b[contador_b] || contador_b == len_b) && contador_a != len_a) {
+            seq[i] = a[contador_a]; contador_a++;
+        } else {
+            seq[i] = b[contador_b]; contador_b++;
+        }
+    }
+    return seq;
+}
+
 int main()
 {
 	printf("=====================01=====================\n");
@@ -128,42 +144,57 @@ int main()
 	printf("=====================03=====================\n");
 	//					  ainda nao fiz
 	printf("=====================04=====================\n");
-    int m[] = {5, 2, 2, 3, 4, 4, 4, 4, 4, 1, 1};
-    int size_m = sizeof(m) / sizeof(m[0]);
-    printf("04: %d\n", conta_sub_seq(m, size_m));
-    int n[] = {3, 3, -1, -1, -1, 12, 12, 12, 3, 3};
-    int size_n = sizeof(n) / sizeof(n[0]);
-    printf("04: %d\n", conta_sub_seq(n, size_n));
-    printf("=====================05=====================\n");
-    int p[] = {5, 10, 3, 2, 4, 7, 9, 8, 5};
-    int size_p = sizeof(p) / sizeof(p[0]);
-    printf("05: %d\n", max_seq_cres(p, size_p));
-    int q[] = {10, 8, 7, 5, 2};
-    int size_q = sizeof(q) / sizeof(q[0]);
-    printf("05: %d\n", max_seq_cres(q, size_q));
-    printf("=====================06=====================\n");
-    printf("a) ");
-    int a[] = {7, 9, 5, 4, 5, 4, 8, 6};
-    int size_a = sizeof(a) /  sizeof(a[0]);
-    seg_consec(a, size_a);
-    printf("b) ");
-    int b[] = {7, 9, 5, 4, 8, 5, 4, 8, 6};
-    int size_b = sizeof(b) /  sizeof(b[0]);
-    seg_consec(b, size_b);
-    printf("c) ");
-    int c[] = {0, 1, 2, 0, 1, 2, 6};
-    int size_c = sizeof(c) / sizeof(c[0]);
-    seg_consec(c, size_c);
-    printf("d) ");
-    int d[] = {2, 2, 3, 5, 6};
-    int size_d = sizeof(d) / sizeof(d[0]);
-    seg_consec(d, size_d);
-    printf("e) ");
-    int e[] = {2, 3, 5, 2, 3, 6};
-    int size_e = sizeof(e) / sizeof(e[0]);
-    seg_consec(e, size_e);
-    printf("=====================07=====================\n");
-    int f[] = {5, 2, -2, -7, 3, 14, 10, -3, 9, -6, 4, 1};
-    int size_f = sizeof(f) / sizeof(f[0]);
-    printf("%d\n", max_soma_seg(f, size_f));
+	int m[] = {5, 2, 2, 3, 4, 4, 4, 4, 4, 1, 1};
+	int size_m = sizeof(m) / sizeof(m[0]);
+	printf("04: %d\n", conta_sub_seq(m, size_m));
+	int n[] = {3, 3, -1, -1, -1, 12, 12, 12, 3, 3};
+	int size_n = sizeof(n) / sizeof(n[0]);
+	printf("04: %d\n", conta_sub_seq(n, size_n));
+	printf("=====================05=====================\n");
+	int p[] = {5, 10, 3, 2, 4, 7, 9, 8, 5};
+	int size_p = sizeof(p) / sizeof(p[0]);
+	printf("05: %d\n", max_seq_cres(p, size_p));
+	int q[] = {10, 8, 7, 5, 2};
+	int size_q = sizeof(q) / sizeof(q[0]);
+	printf("05: %d\n", max_seq_cres(q, size_q));
+	printf("=====================06=====================\n");
+	printf("a) ");
+	int a[] = {7, 9, 5, 4, 5, 4, 8, 6};
+	int size_a = sizeof(a) /  sizeof(a[0]);
+	seg_consec(a, size_a);
+	printf("b) ");
+	int b[] = {7, 9, 5, 4, 8, 5, 4, 8, 6};
+	int size_b = sizeof(b) /  sizeof(b[0]);
+	seg_consec(b, size_b);
+	printf("c) ");
+	int c[] = {0, 1, 2, 0, 1, 2, 6};
+	int size_c = sizeof(c) / sizeof(c[0]);
+	seg_consec(c, size_c);
+	printf("d) ");
+	int d[] = {2, 2, 3, 5, 6};
+	int size_d = sizeof(d) / sizeof(d[0]);
+	seg_consec(d, size_d);
+	printf("e) ");
+	int e[] = {2, 3, 5, 2, 3, 6};
+	int size_e = sizeof(e) / sizeof(e[0]);
+	seg_consec(e, size_e);
+	printf("=====================07=====================\n");
+	int f[] = {5, 2, -2, -7, 3, 14, 10, -3, 9, -6, 4, 1};
+	int size_f = sizeof(f) / sizeof(f[0]);
+	printf("%d\n", max_soma_seg(f, size_f));
+	printf("=====================07=====================\n");
+    int g[] = {2, 4, 6, 8, 10, 12, 14, 16};
+    int h[] = {1, 3, 5, 7, 9, 11, 13, 15};
+    int m = sizeof(g) / sizeof(g[0]);
+    int n = sizeof(h) / sizeof(h[0]);
+    int *array; int len_array = m + n;
+    array = junta_ordenadas(g, h, m, n);
+    exibir_vetor(array, len_array); printf("\n");
+    int p[] = {18, 19};
+    int q[] = {3, 6, 7, 9, 11, 14, 15, 16};
+    int len_p = sizeof(p) / sizeof(p[0]);
+    int len_q = sizeof(q) / sizeof(q[0]);
+    int *array2; int len_array2 = len_p + len_q;
+    array2 = junta_ordenadas(p, q, len_p, len_q);
+    exibir_vetor(array2, len_array2); printf("\n");
 }
