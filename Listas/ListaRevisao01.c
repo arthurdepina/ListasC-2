@@ -59,7 +59,8 @@ int max_seq_cres(int *s, int len_s)			// Complexidade: O(n)
 }
 
 // ex 06
-void seg_consec(int *a, int len_a){
+void seg_consec(int *a, int len_a)
+{
     bool iguais = false;
     int tamanho = 0;
     int dist = 0;
@@ -82,6 +83,22 @@ void seg_consec(int *a, int len_a){
         if (iguais) break;
     }
     if (!iguais) printf("Sem segmentos consecutivos.\n");
+}
+
+// ex 07
+int max_soma_seg(int *s, int len_s)
+{
+    int max = s[0];
+    int current_sum = 0;
+    for (int i = 0; i < len_s; i++){
+        current_sum = s[i];
+        if (current_sum > max) max = current_sum;
+        for (int j = i + 1; j < len_s; j++){
+            current_sum = current_sum + s[j];
+            if (current_sum > max) max = current_sum;
+        }
+    }
+    return max;
 }
 
 int main()
@@ -146,5 +163,7 @@ int main()
     int size_e = sizeof(e) / sizeof(e[0]);
     seg_consec(e, size_e);
     printf("=====================07=====================\n");
-
+    int f[] = {5, 2, -2, -7, 3, 14, 10, -3, 9, -6, 4, 1};
+    int size_f = sizeof(f) / sizeof(f[0]);
+    printf("%d\n", max_soma_seg(f, size_f));
 }
