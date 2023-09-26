@@ -20,6 +20,7 @@ int mdc_2(int x, int y)
 	return 0;
 }
 
+// ex 02
 int max_bitonic(int *vetor, int menor, int maior)
 {
 	int meio = (menor + maior)/2;
@@ -29,6 +30,21 @@ int max_bitonic(int *vetor, int menor, int maior)
 		return max_bitonic(vetor, menor, meio-1);
 	else return max_bitonic(vetor, meio+1, maior);
 }
+
+// ex 03
+/* ainda nao fiz */
+
+// ex 04
+int conta_sub_seq(int *s, int len_s)		// Complexidade: O(n)
+{
+        int current = s[0];
+        int count = 1;
+        for (int i = 1; i < len_s; i++)
+                if (s[i] != current) { current = s[i]; count++; }
+        return count;
+}
+
+
 
 int main()
 {
@@ -54,4 +70,14 @@ int main()
 	printf("Máximo elemento: %d\n", max_bitonic(vetor_c, 0, len_c-1));
 	exibir_vetor(vetor_d, len_d); printf("\n");
 	printf("Máximo elemento: %d\n", max_bitonic(vetor_d, 0, len_d-1));
+	printf("=====================03=====================\n");
+	//					  ainda nao fiz
+	printf("=====================04=====================\n");
+    int m[] = {5, 2, 2, 3, 4, 4, 4, 4, 4, 1, 1};
+    int size_m = sizeof(m) / sizeof(m[0]);
+    printf("04: %d\n", conta_sub_seq(m, size_m));
+    int n[] = {3, 3, -1, -1, -1, 12, 12, 12, 3, 3};
+    int size_n = sizeof(n) / sizeof(n[0]);
+    printf("04: %d\n", conta_sub_seq(n, size_n));
+    printf("=====================05=====================\n");
 }
