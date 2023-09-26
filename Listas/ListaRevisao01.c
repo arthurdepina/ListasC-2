@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include <stdlib.h>
 
 void exibir_vetor(int *v, int len){
 	for (int i = 0; i < len; i++){
@@ -223,15 +224,17 @@ int main()
 	int size_g = sizeof(g) / sizeof(g[0]);
 	int size_h = sizeof(h) / sizeof(h[0]);
 	int *array; int len_array = size_g + size_h;
-	array = junta_ordenadas(g, h, m, n);
+	array = junta_ordenadas(g, h, size_g, size_h);
 	exibir_vetor(array, len_array); printf("\n");
-	int p[] = {18, 19};
-	int q[] = {3, 6, 7, 9, 11, 14, 15, 16};
-	int len_p = sizeof(p) / sizeof(p[0]);
-	int len_q = sizeof(q) / sizeof(q[0]);
-	int *array2; int len_array2 = len_p + len_q;
-	array2 = junta_ordenadas(p, q, len_p, len_q);
+	free(array);
+	int p_8[] = {18, 19};
+	int q_8[] = {3, 6, 7, 9, 11, 14, 15, 16};
+	int len_p_8 = sizeof(p_8) / sizeof(p_8[0]);
+	int len_q_8 = sizeof(q_8) / sizeof(q_8[0]);
+	int *array2; int len_array2 = len_p_8 + len_q_8;
+	array2 = junta_ordenadas(p_8, q_8, len_p_8, len_q_8);
 	exibir_vetor(array2, len_array2); printf("\n");
+	free(array2);
 	printf("=====================09=====================\n");
 	int tam_str = 3;
 	printf("Exemplo, n = %d:\n", tam_str - 1);
