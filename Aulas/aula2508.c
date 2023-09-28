@@ -1,8 +1,8 @@
 #include <stdio.h>
 
-void ex2(int a, int b){
+int ex2(int a, int b){
 	if (b == 1) return a;
-	if (b%2 = 0) return ex2(a*a, b/2);
+	if (b % 2 == 0) return ex2(a*a, b/2);
 	return a * ex2(a - 1, b - 1);
 }
 
@@ -23,7 +23,7 @@ void hanoi(int n, char orig, char dest, char aux){
 
 void g(int n) {
 	if(n > 1) {
-		for (i = 0; i < n; i++){
+		for (int i = 0; i < n; i++){
 			printf("%d", n);
 		}
 		g(n/2); g(n/2); g(n/2); g(n/2);
@@ -32,8 +32,8 @@ void g(int n) {
 
 void h(int n){
 	if (n > 1) {
-		for (i = 0; i < n; i++){
-			for (j = 0; j < n; j++){
+		for (int i = 0; i < n; i++){
+			for (int j = 0; j < n; j++){
 				printf("%d\n");
 			}
 		}
