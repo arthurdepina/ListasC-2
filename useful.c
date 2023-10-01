@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void exibir_vetor(int *v, int len){
+void exibir_vetor(int *v, int len)
+{
 	for (int i = 0; i < len; i++){
 		if (i == 0) printf("[");
 		if (i == len - 1) printf("%d]", v[i]);
@@ -9,7 +10,8 @@ void exibir_vetor(int *v, int len){
 	}
 }
 
-void exibir_matriz(int **matriz, int n_linhas, int n_colunas){
+void exibir_matriz(int **matriz, int n_linhas, int n_colunas)
+{
     int i, j;
     for (i = 0; i < n_linhas; i++){
         for (j = 0; j < n_colunas; j++){
@@ -18,7 +20,8 @@ void exibir_matriz(int **matriz, int n_linhas, int n_colunas){
     }
 }
 
-int **alocar_matriz(int n_linhas, int n_colunas){
+int **alocar_matriz(int n_linhas, int n_colunas)
+{
     int **matriz;
     matriz = (int**) calloc(n_linhas, sizeof(int*));
     for (int i = 0; i < n_linhas; i++){
@@ -27,7 +30,8 @@ int **alocar_matriz(int n_linhas, int n_colunas){
     return matriz;
 }
 
-int converter_p_binario(int n){
+int converter_p_binario(int n)
+{
     int resto;
     int multi = 1;
     int bin = 0;
@@ -39,6 +43,15 @@ int converter_p_binario(int n){
         bin = bin + resto;
     }
     return bin;
+}
+
+int soma_vetor(int *vetor, int len)
+{
+    int soma = 0;
+    for (int i = 0; i < len; i++) {
+        soma = soma + vetor[i];
+    }
+    return soma;
 }
 
 /*

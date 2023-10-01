@@ -3,7 +3,8 @@
 #include <stdlib.h>
 #include <math.h>
 
-void exibir_vetor(int *v, int len){
+void exibir_vetor(int *v, int len)
+{
 	for (int i = 0; i < len; i++){
 		if (i == 0) printf("[");
 		if (i == len - 1) printf("%d]", v[i]);
