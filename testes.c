@@ -1,28 +1,43 @@
+#include <stdbool.h>
 #include <stdio.h>
-#include <string.h>
 
-void printBinary(int n, char *str, int index) {
-    // Caso base: se o índice for igual a n, imprima a string e retorne
-    if (index == n) {
-        str[index] = '\0';  // Finalize a string
-        printf("%s\n", str);
-        return;
+bool backtrack(int *palitos, int n, int lados[4], int lado_alvo, int idx) {
+    if (idx == n) {
+        return lados[0] == lado_alvo && lados[1] == lado_alvo && lados[2] == lado_alvo && lados[3] == lado_alvo;
     }
 
-    // Adicione '0' na posição atual e faça uma chamada recursiva para o próximo índice
-    str[index] = '0';
-    printBinary(n, str, index + 1);
+    for (int i = 0; i < 4; i++) {
+        if (lados[i] + palitos[idx] > lado_alvo) continue;
 
-    // Adicione '1' na posição atual e faça uma chamada recursiva para o próximo índice
-    str[index] = '1';
-    printBinary(n, str, index + 1);
+        lados[i] += palitos[idx];
+        if (backtrack(palitos, n, lados, lado_alvo, idx + 1)) return true;
+        lados[i] -= palitos[idx];
+    }
+
+    return false;
+}
+
+bool pode_formar_quadrado(int *palitos, int n) {
+    if (n < 4) return false;
+
+    int soma = 0;
+    for (int i = 0; i < n; i++) soma += palitos[i];
+
+    if (soma % 4 != 0) return false;
+
+    int lados[4] = {0, 0, 0, 0};
+    return backtrack(palitos, n, lados, soma / 4, 0);
 }
 
 int main() {
-    int n = 3;
-    char str[n + 1];  // +1 para o caractere nulo no final
+    int palitos[] = {9, 8, 7, 6, 4, 3, 2, 1};
+    int n = sizeof(palitos) / sizeof(palitos[0]);
 
-    printBinary(n, str, 0);
+    if (pode_formar_quadrado(palitos, n)) {
+        printf("Pode formar um quadrado.\n");
+    } else {
+        printf("Não pode formar um quadrado.\n");
+    }
 
     return 0;
 }
