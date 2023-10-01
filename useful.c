@@ -54,6 +54,13 @@ int soma_vetor(int *vetor, int len)
     return soma;
 }
 
+void troca(int *a, int *b)
+{
+	int temp = *a;
+	*a = *b;
+	*b = temp;
+}
+
 /*
             Apenas para referenciar
 */

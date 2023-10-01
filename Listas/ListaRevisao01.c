@@ -251,6 +251,24 @@ int max_elegante(int *vetor, int len, int count)
     return soma_maxima;
 }
 
+// ex 15
+bool existe_subconjunto(int *conjunto, int len, int soma, int c, int count)
+{
+    if (soma == c) return true;
+    if (count == len || soma > c) return false;
+
+    // Incluindo elemento atual
+    int nova_soma = soma + conjunto[count];
+    if (existe_subconjunto(conjunto, len, nova_soma, c, count + 1))
+        return true;
+    
+    // Não inlcuindo elemento atual
+    if (existe_subconjunto(conjunto, len, soma, c, count + 1))
+        return true;
+
+    return false;
+}
+
 int main()
 {
 	printf("=====================01=====================\n");
@@ -387,10 +405,21 @@ int main()
 	printf("=====================13=====================\n");
 					    // ainda nao fiz
 	printf("=====================14=====================\n");
+	
     int array_permut[] = {4, 2, 1, 5};
     int len_permut = sizeof(array_permut) / sizeof(array_permut[0]);
     int permut_maxima = max_elegante(array_permut, len_permut, 0);
     printf("Soma permutada elegante = %d\n", permut_maxima);
+
 	printf("=====================15=====================\n");
+
+    int cheques[] = {30, 40, 10, 15, 11, 60, 54};
+    int len_cheques = sizeof(cheques) / sizeof(cheques[0]);
+    int valor_debitado = 55;
+    bool existe = existe_subconjunto(cheques, len_cheques, 0, valor_debitado, 0);
+    if (existe) printf("Há cheques correspondentes.\n");
+    else printf("Não há cheques correspondentes.\n");
+
+	printf("============================================\n");
 	return 0;
 }

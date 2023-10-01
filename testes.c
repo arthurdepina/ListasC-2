@@ -1,43 +1,37 @@
-#include <stdbool.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include "useful.c"
 
-bool backtrack(int *palitos, int n, int lados[4], int lado_alvo, int idx) {
+int maxElegantPermutedSum(int *arr, int n, int idx) {
     if (idx == n) {
-        return lados[0] == lado_alvo && lados[1] == lado_alvo && lados[2] == lado_alvo && lados[3] == lado_alvo;
+        int sum = 0;
+        for (int i = 0; i < n - 1; i++) {
+            sum += abs(arr[i] - arr[i + 1]);
+        }
+        return sum;
     }
 
-    for (int i = 0; i < 4; i++) {
-        if (lados[i] + palitos[idx] > lado_alvo) continue;
+    int maxSum = 0;
+    for (int i = idx; i < n; i++) {
+        troca(&arr[i], &arr[idx]);
 
-        lados[i] += palitos[idx];
-        if (backtrack(palitos, n, lados, lado_alvo, idx + 1)) return true;
-        lados[i] -= palitos[idx];
+        int sum = maxElegantPermutedSum(arr, n, idx + 1);
+
+        troca(&arr[i], &arr[idx]);
+
+        if (sum > maxSum) {
+            maxSum = sum;
+        }
     }
-
-    return false;
-}
-
-bool pode_formar_quadrado(int *palitos, int n) {
-    if (n < 4) return false;
-
-    int soma = 0;
-    for (int i = 0; i < n; i++) soma += palitos[i];
-
-    if (soma % 4 != 0) return false;
-
-    int lados[4] = {0, 0, 0, 0};
-    return backtrack(palitos, n, lados, soma / 4, 0);
+    return maxSum;
 }
 
 int main() {
-    int palitos[] = {9, 8, 7, 6, 4, 3, 2, 1};
-    int n = sizeof(palitos) / sizeof(palitos[0]);
+    int n = 4;
+    int arr[] = {1, 5, 8, 4};
 
-    if (pode_formar_quadrado(palitos, n)) {
-        printf("Pode formar um quadrado.\n");
-    } else {
-        printf("Não pode formar um quadrado.\n");
-    }
+    int maxSum = maxElegantPermutedSum(arr, n, 0);
+    printf("A soma permutada elegante é %d\n", maxSum);
 
     return 0;
 }
