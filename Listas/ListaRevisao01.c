@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
+#include <math.h>
 
 void exibir_vetor(int *v, int len){
 	for (int i = 0; i < len; i++){
@@ -34,7 +35,14 @@ int max_bitonic(int *vetor, int menor, int maior)
 }
 
 // ex 03
-/* ainda nao fiz */
+float recursive_sqrt(float x, float guess, double tol)
+{
+    if (fabs((guess * guess) - x) <= tol) return guess;
+    else {
+        float new_guess = ((guess * guess) + x)/(2 * guess);
+        return recursive_sqrt(x, new_guess, tol);
+    } 
+}
 
 // ex 04
 int conta_sub_seq(int *s, int len_s)		// Complexidade: O(n)
@@ -178,7 +186,10 @@ int main()
 	exibir_vetor(vetor_d, len_d); printf("\n");
 	printf("Máximo elemento: %d\n", max_bitonic(vetor_d, 0, len_d-1));
 	printf("=====================03=====================\n");
-	//					  ainda nao fiz
+    float quadrada = recursive_sqrt(13, 3.2, 0.001);
+    printf("a) %f\n", quadrada);
+    float quadrada2 = recursive_sqrt(100, 90, 0.0001);
+    printf("b)%f\n", quadrada2);
 	printf("=====================04=====================\n");
 	int m[] = {5, 2, 2, 3, 4, 4, 4, 4, 4, 1, 1};
 	int size_m = sizeof(m) / sizeof(m[0]);
