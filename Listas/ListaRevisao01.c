@@ -224,6 +224,33 @@ bool quadrado_palito(int *palitos, int len_palitos)
     return testa_quadrados(palitos, len_palitos, lados, lado_quadrado, 0);
 }
 
+// ex 13
+			// ainda nao fiz
+
+// ex 14
+int max_elegante(int *vetor, int len, int count)
+{
+    if (count == len) {
+        int soma = 0;
+        for (int i = 0; i < len - 1; i++) {
+            soma += abs(vetor[i] - vetor[i + 1]);
+        }
+        return soma;
+    }
+
+    int soma_maxima = 0;
+    for (int i = count; i < len; i++) {
+        troca(&vetor[i], &vetor[count]);
+
+        int soma = max_elegante(vetor, len, count + 1);
+
+        troca(&vetor[i], &vetor[count]);
+
+        if (soma > soma_maxima) soma_maxima = soma;
+    }
+    return soma_maxima;
+}
+
 int main()
 {
 	printf("=====================01=====================\n");
@@ -358,6 +385,12 @@ int main()
     else printf("Impossível montar quadrado\n");
 
 	printf("=====================13=====================\n");
-
+					    // ainda nao fiz
+	printf("=====================14=====================\n");
+    int array_permut[] = {4, 2, 1, 5};
+    int len_permut = sizeof(array_permut) / sizeof(array_permut[0]);
+    int permut_maxima = max_elegante(array_permut, len_permut, 0);
+    printf("Soma permutada elegante = %d\n", permut_maxima);
+	printf("=====================15=====================\n");
 	return 0;
 }
