@@ -11,6 +11,13 @@ void exibir_vetor(int *v, int len){
 	}
 }
 
+void troca(int *a, int *b)
+{
+	int temp = *a;
+	*a = *b;
+	*b = temp;
+}
+
 // ex 01
 int mdc_2(int x, int y)
 {
@@ -161,6 +168,24 @@ void abba(char *resultado, int m, int n, int count_m, int count_n ){
     }
 }
 
+// ex 11
+bool ordena_rec(int *vetor, int inicio, int n)
+{
+    if (inicio == n) {
+        bool em_ordem = true;
+        for (int i = 0; i < n - 1; i++){
+            if (vetor[i] > vetor[i+1]) em_ordem = false;
+        }
+        return em_ordem;
+    }
+    for (int i = inicio; i < n; i++) {
+        troca(&vetor[inicio], &vetor[i]);
+        if (ordena_rec(vetor, inicio + 1, n)) return true;
+        troca(&vetor[inicio], &vetor[i]);
+    }
+    return false;
+}
+
 int main()
 {
 	printf("=====================01=====================\n");
@@ -186,10 +211,10 @@ int main()
 	exibir_vetor(vetor_d, len_d); printf("\n");
 	printf("Máximo elemento: %d\n", max_bitonic(vetor_d, 0, len_d-1));
 	printf("=====================03=====================\n");
-    float quadrada = recursive_sqrt(13, 3.2, 0.001);
-    printf("a) %f\n", quadrada);
-    float quadrada2 = recursive_sqrt(100, 90, 0.0001);
-    printf("b)%f\n", quadrada2);
+	float quadrada = recursive_sqrt(13, 3.2, 0.001);
+	printf("a) %f\n", quadrada);
+	float quadrada2 = recursive_sqrt(100, 90, 0.0001);
+	printf("b)%f\n", quadrada2);
 	printf("=====================04=====================\n");
 	int m[] = {5, 2, 2, 3, 4, 4, 4, 4, 4, 1, 1};
 	int size_m = sizeof(m) / sizeof(m[0]);
@@ -257,4 +282,16 @@ int main()
 	int tam_placar = gols_a + gols_b;
 	char placar[tam_placar + 1];
 	abba(placar, gols_a, gols_b,  0, 0);
+	printf("=====================11=====================\n");
+	int array_sort[] = {3, 1, 4, 1, 5, 9, 2};
+	int len_array_sort = sizeof(array_sort) / sizeof(array_sort[0]);
+	printf("Vetor original: ");
+	exibir_vetor(array_sort, len_array_sort); printf("\n");
+	ordena_rec(array_sort, 0, len_array_sort);
+	printf("Vetor ordenado: ");
+	exibir_vetor(array_sort, len_array_sort); printf("\n");
+	printf("=====================12=====================\n");
+
+
+	return 0;
 }
