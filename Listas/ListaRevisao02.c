@@ -20,7 +20,8 @@ int max(int a, int b) { return (a > b) ? a : b; }
 
 // Exercício 01
 
-void calcularNotas(double *valor, int notas[], int tamanho) {
+void calcularNotas (double *valor, int notas[], int tamanho) 
+{
     int quantidade, i;
     printf("NOTAS:\n");
     for(i = 0; i < tamanho; i++) {
@@ -30,7 +31,8 @@ void calcularNotas(double *valor, int notas[], int tamanho) {
     }
 }
 
-void calcularMoedas(double *valor, double moedas[], int tamanho) {
+void calcularMoedas (double *valor, double moedas[], int tamanho) 
+{
     int quantidade, i;
     printf("MOEDAS:\n");
     for(i = 0; i < tamanho; i++) {
@@ -42,7 +44,8 @@ void calcularMoedas(double *valor, double moedas[], int tamanho) {
 
 // Exercício 02
 
-void calcularSelos(int taxa, int *selosDe5, int *selosDe3) {
+void calcularSelos (int taxa, int *selosDe5, int *selosDe3) 
+{
     *selosDe5 = taxa / 5;
     int restante = taxa % 5;
 
@@ -62,11 +65,13 @@ void calcularSelos(int taxa, int *selosDe5, int *selosDe3) {
 
 // Exercício 03
 
-int compare(const void *a, const void *b) {
+int compare (const void *a, const void *b) 
+{
     return (*(int *)a - *(int *)b);
 }
 
-int find_max_files_to_copy(int sizes[], int n, int c) {
+int find_max_files_to_copy (int sizes[], int n, int c) 
+{
     qsort(sizes, n, sizeof(int), compare);
     
     int count = 0;
@@ -86,7 +91,8 @@ int find_max_files_to_copy(int sizes[], int n, int c) {
 
 // Exercício 04
 
-int minStops(int d[], int n, int m) {
+int minStops (int d[], int n, int m) 
+{
     int numStops = 0, currentPos = 0, lastStop = 0, i;
 
     while (currentPos < n - 1) {
@@ -118,13 +124,15 @@ typedef struct {
     int weight;
 } Item;
 
-int cmp(const void *a, const void *b) {
+int cmp (const void *a, const void *b) 
+{
     double r1 = (double)((Item *)a)->value / ((Item *)a)->weight;
     double r2 = (double)((Item *)b)->value / ((Item *)b)->weight;
     return r1 < r2 ? 1 : -1;
 }
 
-double fractionalKnapsack(int W, Item arr[], int n) {
+double fractionalKnapsack (int W, Item arr[], int n) 
+{
     qsort(arr, n, sizeof(Item), cmp);
     
     int curWeight = 0;
@@ -151,7 +159,8 @@ typedef struct {
     int proteinas;
 } Alimento;
 
-void calcularDieta(int K, Alimento alimentos[], int n) {
+void calcularDieta (int K, Alimento alimentos[], int n) 
+{
     int i, j;
     // Criar e inicializar a matriz de programação dinâmica
     int **dp = (int **)malloc((n + 1) * sizeof(int *));
@@ -192,13 +201,15 @@ typedef struct {
     int fim;
 } Atividade;
 
-int comparaAtividades(const void *a, const void *b) {
+int comparaAtividades (const void *a, const void *b) 
+{
     Atividade *atividadeA = (Atividade *)a;
     Atividade *atividadeB = (Atividade *)b;
     return atividadeA->fim - atividadeB->fim;
 }
 
-void seleciona_atividades_guloso(Atividade atividades[], int n) {
+void seleciona_atividades_guloso (Atividade atividades[], int n)
+{
     // Ordena as atividades por tempo de término
     qsort(atividades, n, sizeof(Atividade), comparaAtividades);
 
@@ -219,7 +230,8 @@ void seleciona_atividades_guloso(Atividade atividades[], int n) {
 
 // Exercício 08
 
-int countWays(int n) {
+int countWays (int n) 
+{
     // Se n for 0 ou 1, existe apenas uma maneira de subir
     if (n == 0 || n == 1) return 1;
     
@@ -243,7 +255,8 @@ int countWays(int n) {
 
 // Exercício 09
 
-int minQuadrados(int n) {
+int minQuadrados (int n)
+{
     // Se n for 0, não precisamos de nenhum número
     if (n <= 0) {
         return 0;
@@ -274,7 +287,8 @@ int minQuadrados(int n) {
 // Exercício 10
 
                     // Subsequencia crescente mais longa - recursiva
-int lis_backtracking(int arr[], int n, int prev, int curr) {
+int lis_backtracking (int arr[], int n, int prev, int curr)
+{
     if (curr == n) {
         return 0;
     }
@@ -290,7 +304,8 @@ int lis_backtracking(int arr[], int n, int prev, int curr) {
 }
 
                     // Subsequencia crescente mais longa - top-down
-int lis_top_down(int arr[], int n, int prev_index, int curr, int dp[MAX][MAX]) {
+int lis_top_down (int arr[], int n, int prev_index, int curr, int dp[MAX][MAX])
+{
     if (curr == n) {
         return 0;
     }
@@ -311,7 +326,8 @@ int lis_top_down(int arr[], int n, int prev_index, int curr, int dp[MAX][MAX]) {
 }
 
                     // Subsequencia crescente mais longa - bottom-up
-int lis_bottom_up(int arr[], int n) {
+int lis_bottom_up (int arr[], int n)
+{
     int dp[MAX], i, j, maxLIS = 0;
 
     for (i = 0; i < n; i++) {
@@ -336,7 +352,8 @@ int lis_bottom_up(int arr[], int n) {
 // Exercício 11
 
                     // Versão backtracking
-int minCoinsRec(int coins[], int n, int V) {
+int minCoinsRec (int coins[], int n, int V)
+{
     if (V == 0) return 0;
 
     int res = INT_MAX;
@@ -353,7 +370,8 @@ int minCoinsRec(int coins[], int n, int V) {
 }
 
                     // Versão top-down
-int minCoinsTopDown(int coins[], int n, int V, int dp[]) {
+int minCoinsTopDown (int coins[], int n, int V, int dp[])
+{
     if (V == 0) return 0;
 
     if (dp[V] != -1) return dp[V];
@@ -374,7 +392,8 @@ int minCoinsTopDown(int coins[], int n, int V, int dp[]) {
 }
 
                     // Versão bottom-up
-int minCoinsBottomUp(int coins[], int n, int V) {
+int minCoinsBottomUp (int coins[], int n, int V)
+{
     int dp[V+1];
 
     dp[0] = 0;
@@ -397,7 +416,8 @@ int minCoinsBottomUp(int coins[], int n, int V) {
 // Exercício 12
 
                         // Função recursiva para o problema da mochila
-int knapsack(int W, int wt[], int val[], int n) {
+int knapsack (int W, int wt[], int val[], int n)
+{
     // Caso base
     if (n == 0 || W == 0) return 0;
 
@@ -412,7 +432,8 @@ int knapsack(int W, int wt[], int val[], int n) {
 }
 
                         // Função top-down para o problema da mochila
-int knapSackUtil(int W, int wt[], int val[], int n, int **dp) {
+int knapSackUtil (int W, int wt[], int val[], int n, int **dp)
+{
     if (n == 0 || W == 0) return 0;
 
     if (dp[n][W] != -1) return dp[n][W];
@@ -424,7 +445,8 @@ int knapSackUtil(int W, int wt[], int val[], int n, int **dp) {
                               knapSackUtil(W, wt, val, n-1, dp));
 }
 
-int knapsack_top_down(int W, int wt[], int val[], int n) {
+int knapsack_top_down (int W, int wt[], int val[], int n)
+{
     int **dp;
     dp = (int **)malloc((n+1) * sizeof(int *));
     for (int i = 0; i <= n; i++) {
@@ -435,7 +457,8 @@ int knapsack_top_down(int W, int wt[], int val[], int n) {
 }
 
                         // Função bottom-up para o problema da mochila
-int knapsack_bottom_up(int W, int wt[], int val[], int n) {
+int knapsack_bottom_up (int W, int wt[], int val[], int n)
+{
     int i, w;
     int K[n+1][W+1];
 
