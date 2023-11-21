@@ -26,6 +26,30 @@ int max(int a, int b) { return (a > b) ? a : b; }
 
                     // Fim das funções comuns para todos os exercícios
 
+// Exercício 08
+
+int countWays(int n) {
+    // Se n for 0 ou 1, existe apenas uma maneira de subir
+    if (n == 0 || n == 1) return 1;
+    
+    // Se n for 2, existem duas maneiras: (1, 1) ou (2)
+    if (n == 2) return 2;
+
+    // Inicializa os dois primeiros valores
+    int one_step_before = 2; // maneiras de subir (n-1) degraus
+    int two_steps_before = 1; // maneiras de subir (n-2) degraus
+    int all_ways = 0;
+
+    // Calcula o número de maneiras para os degraus restantes
+    for (int i = 3; i <= n; i++) {
+        all_ways = one_step_before + two_steps_before;
+        two_steps_before = one_step_before;
+        one_step_before = all_ways;
+    }
+
+    return all_ways;
+}
+
 // Exercício 09
 
 int minQuadrados(int n) {
@@ -421,6 +445,11 @@ int cutRodTopDown (int precos[], int n, int memo[])
 
 int main ()
 {
+    printf("=====================08=====================\n");
+
+    int n_08 = 2;
+    printf("Número de maneiras de subir a escada: %d\n", countWays(n_08));
+
     printf("=====================09=====================\n");
 
     int n_09 = 12;
