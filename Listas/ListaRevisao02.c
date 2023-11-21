@@ -13,12 +13,74 @@
 #include <math.h>
 #include <limits.h>
 
+int max(int a, int b) { return (a > b) ? a : b; }
+
+// Exercício 12
+
+                        // Função recursiva para o problema da mochila
+int knapsack(int W, int wt[], int val[], int n) {
+    // Caso base
+    if (n == 0 || W == 0) return 0;
+
+    // Se o peso do último item for mais do que a capacidade da mochila, ele não pode ser incluído
+    if (wt[n-1] > W)
+        return knapsack(W, wt, val, n-1);
+
+    // Retorna o máximo de dois casos:
+    // (1) último item incluído
+    // (2) não incluído
+    else return max(val[n-1] + knapsack(W-wt[n-1], wt, val, n-1), knapsack(W, wt, val, n-1));
+}
+
+                        // Função top-down para o problema da mochila
+int knapSackUtil(int W, int wt[], int val[], int n, int **dp) {
+    if (n == 0 || W == 0) return 0;
+
+    if (dp[n][W] != -1) return dp[n][W];
+
+    if (wt[n-1] > W)
+        return dp[n][W] = knapSackUtil(W, wt, val, n-1, dp);
+    else
+        return dp[n][W] = max(val[n-1] + knapSackUtil(W-wt[n-1], wt, val, n-1, dp), 
+                              knapSackUtil(W, wt, val, n-1, dp));
+}
+
+int knapsack_top_down(int W, int wt[], int val[], int n) {
+    int **dp;
+    dp = (int **)malloc((n+1) * sizeof(int *));
+    for (int i = 0; i <= n; i++) {
+        dp[i] = (int *)malloc((W+1) * sizeof(int));
+        memset(dp[i], -1, (W+1) * sizeof(int));
+    }
+    return knapSackUtil(W, wt, val, n, dp);
+}
+
+                        // Função bottom-up para o problema da mochila
+int knapsack_bottom_up(int W, int wt[], int val[], int n) {
+    int i, w;
+    int K[n+1][W+1];
+
+    for (i = 0; i <= n; i++) {
+        for (w = 0; w <= W; w++) {
+            if (i == 0 || w == 0)
+                K[i][w] = 0;
+            else if (wt[i-1] <= w)
+                K[i][w] = max(val[i-1] + K[i-1][w-wt[i-1]],  K[i-1][w]);
+            else
+                K[i][w] = K[i-1][w];
+        }
+    }
+
+    return K[n][W];
+}                  
+
 // Exercício 13
 
 int m[100][100];
 int s[100][100];
 
-void matrix_chain_order(int p[], int n) {
+void matrix_chain_order (int p[], int n) 
+{
     int i, j, k, L, q;
 
     for (i = 1; i < n; i++) {
@@ -40,7 +102,8 @@ void matrix_chain_order(int p[], int n) {
     }
 }
 
-void print_optimal_parens(int i, int j) {
+void print_optimal_parens (int i, int j) 
+{
     if (i == j)
         printf("A%d", i);
     else {
@@ -51,7 +114,8 @@ void print_optimal_parens(int i, int j) {
     }
 }
 
-int MatrixChainOrderRecursive(int p[], int i, int j) {
+int MatrixChainOrderRecursive (int p[], int i, int j) 
+{
     if (i == j)
         return 0;
 
@@ -74,12 +138,14 @@ int MatrixChainOrderRecursive(int p[], int i, int j) {
 }
 
 // Função auxiliar para inicializar a matriz de memorização
-void initialize() {
+void initialize () 
+{
     memset(m, -1, sizeof(m));
 }
 
 // Função de programação dinâmica top-down para calcular o número mínimo de multiplicações
-int MatrixChainOrderTopDown(int p[], int i, int j) {
+int MatrixChainOrderTopDown (int p[], int i, int j) 
+{
     if (i == j)
         return 0;
 
@@ -101,7 +167,8 @@ int MatrixChainOrderTopDown(int p[], int i, int j) {
 
 int memo[100][100];
 
-int scm_recursivo(const char *X, const char *Y, int m, int n) {
+int scm_recursivo (const char *X, const char *Y, int m, int n) 
+{
     if (m == 0 || n == 0)
         return 0;
     if (X[m - 1] == Y[n - 1])
@@ -110,7 +177,8 @@ int scm_recursivo(const char *X, const char *Y, int m, int n) {
         return fmax(scm_recursivo(X, Y, m, n - 1), scm_recursivo(X, Y, m - 1, n));
 }
 
-int scm_top_down(const char *X, const char *Y, int m, int n) {
+int scm_top_down (const char *X, const char *Y, int m, int n) 
+{
     if (m == 0 || n == 0)
         return 0;
 
@@ -125,7 +193,8 @@ int scm_top_down(const char *X, const char *Y, int m, int n) {
     return memo[m][n];
 }
 
-int scm_bottom_up(const char *X, const char *Y) {
+int scm_bottom_up (const char *X, const char *Y) 
+{
     int m = strlen(X), n = strlen(Y);
     int dp[m + 1][n + 1];
     memset(dp, 0, sizeof(dp));
@@ -143,9 +212,8 @@ int scm_bottom_up(const char *X, const char *Y) {
 
 // Exercício 15
 
-int max(int a, int b) { return (a > b) ? a : b; }
-
-int cutRodRecursiva(int precos[], int n) {
+int cutRodRecursiva (int precos[], int n) 
+{
     if (n <= 0)
         return 0;
     int max_val = -1;
@@ -156,7 +224,8 @@ int cutRodRecursiva(int precos[], int n) {
     return max_val;
 }
 
-int cutRodBottomUp(int precos[], int n) {
+int cutRodBottomUp (int precos[], int n) 
+{
     int val[n + 1];
     val[0] = 0;
 
@@ -170,7 +239,8 @@ int cutRodBottomUp(int precos[], int n) {
     return val[n];
 }
 
-int cutRodTopDown(int precos[], int n, int memo[]) {
+int cutRodTopDown (int precos[], int n, int memo[]) 
+{
     if (n <= 0)
         return 0;
     if (memo[n] >= 0)
@@ -187,6 +257,24 @@ int cutRodTopDown(int precos[], int n, int memo[]) {
 
 int main ()
 {
+    printf("=====================12=====================\n");
+
+    // Definindo os valores e pesos dos itens
+    int val[] = {60, 100, 120};
+    int wt[] = {10, 20, 30};
+    int W = 50; // Capacidade da mochila
+    int n_12 = sizeof(val) / sizeof(val[0]); // Número de itens
+
+    // Testando a versão recursiva
+    printf("Valor máximo (Recursiva): %d\n", knapsack(W, wt, val, n_12));
+
+    // Testando a versão top-down de programação dinâmica
+    printf("Valor máximo (Top-Down): %d\n", knapsack_top_down(W, wt, val, n_12));
+
+    // Testando a versão bottom-up de programação dinâmica
+    printf("Valor máximo (Bottom-Up): %d\n", knapsack_bottom_up(W, wt, val, n_12));
+    
+
     printf("=====================13=====================\n");
 
     int p[] = {200, 2, 30, 20, 5};
