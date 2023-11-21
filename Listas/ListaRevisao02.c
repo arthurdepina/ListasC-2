@@ -16,11 +16,6 @@
 
 #define MAX 100
 
-/* 
-*                 Os exercícios 1 - 10 estão no Github e Replit disponibilizados acima.
-*                          replit.com/@arthurdepina/ListaRevisao02#main.c              
-*/
-
 int max(int a, int b) { return (a > b) ? a : b; }
 
 // Exercício 01
