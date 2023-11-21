@@ -1,10 +1,11 @@
 /*
- *                 Lista de Exercícios do 2o Bimestre
- *
- *              Arthur de Pina Balduino Leitão  32207840
- *              João Victor Dallapé Madeira     32209592           
- *                                          
- * github.com/arthurdepina/ListasC-2/blob/main/Listas/ListaRevisao02.c   
+*                                 Lista de Exercícios do 2o Bimestre
+*                
+*                              Arthur de Pina Balduino Leitão  32207840
+*                              João Victor Dallapé Madeira     32209592           
+*                                                          
+*                 github.com/arthurdepina/ListasC-2/blob/main/Listas/ListaRevisao02.c
+*                            replit.com/@arthurdepina/ListaRevisao02#main.c
 */
 
 #include <stdio.h>
@@ -13,11 +14,79 @@
 #include <math.h>
 #include <limits.h>
 
-                        // Funções comuns para todos os exercícios
+/* 
+*                 Os exercícios 1 - 10 estão no Github e Replit disponibilizados acima.
+*                          replit.com/@arthurdepina/ListaRevisao02#main.c              
+*/
 
+//                         Funções comuns para todos os exercícios
+
+#define MAX 100
 int max(int a, int b) { return (a > b) ? a : b; }
 
                     // Fim das funções comuns para todos os exercícios
+
+// Exercício 10
+
+                    // Subsequencia crescente mais longa - recursiva
+int lis_backtracking(int arr[], int n, int prev, int curr) {
+    if (curr == n) {
+        return 0;
+    }
+
+    int taken = 0;
+    if (arr[curr] > prev) {
+        taken = 1 + lis_backtracking(arr, n, arr[curr], curr + 1);
+    }
+
+    int not_taken = lis_backtracking(arr, n, prev, curr + 1);
+
+    return max(taken, not_taken);
+}
+
+                    // Subsequencia crescente mais longa - top-down
+int lis_top_down(int arr[], int n, int prev_index, int curr, int dp[MAX][MAX]) {
+    if (curr == n) {
+        return 0;
+    }
+
+    if (dp[prev_index + 1][curr] >= 0) {
+        return dp[prev_index + 1][curr];
+    }
+
+    int taken = 0;
+    if (prev_index < 0 || arr[curr] > arr[prev_index]) {
+        taken = 1 + lis_top_down(arr, n, curr, curr + 1, dp);
+    }
+
+    int not_taken = lis_top_down(arr, n, prev_index, curr + 1, dp);
+
+    dp[prev_index + 1][curr] = max(taken, not_taken);
+    return dp[prev_index + 1][curr];
+}
+
+                    // Subsequencia crescente mais longa - bottom-up
+int lis_bottom_up(int arr[], int n) {
+    int dp[MAX], i, j, maxLIS = 0;
+
+    for (i = 0; i < n; i++) {
+        dp[i] = 1;
+    }
+
+    for (i = 1; i < n; i++) {
+        for (j = 0; j < i; j++) {
+            if (arr[i] > arr[j] && dp[i] < dp[j] + 1) {
+                dp[i] = dp[j] + 1;
+            }
+        }
+    }
+
+    for (i = 0; i < n; i++) {
+        maxLIS = max(maxLIS, dp[i]);
+    }
+
+    return maxLIS;
+}
 
 // Exercício 11
 
@@ -322,6 +391,16 @@ int cutRodTopDown (int precos[], int n, int memo[])
 
 int main ()
 {
+    printf("=====================10=====================\n");
+
+    int arr_10[] = {10, 22, 9, 33, 21, 50, 41, 60, 80};
+    int n_10 = sizeof(arr_10)/sizeof(arr_10[0]);
+    int dp_10[MAX][MAX];
+    memset(dp_10, -1, sizeof(dp_10));
+    printf("Comprimento: %d\n", lis_backtracking(arr_10, n_10, -1, 0));
+    printf("Comprimento: %d\n", lis_top_down(arr_10, n_10, -1, 0, dp_10));
+    printf("Comprimento: %d\n", lis_bottom_up(arr_10, n_10));
+
     printf("=====================11=====================\n");
 
     int coins[] = {1, 5, 10, 25};  // Exemplo de conjunto de moedas
