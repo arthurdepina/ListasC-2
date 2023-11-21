@@ -23,6 +23,33 @@
 
 int max(int a, int b) { return (a > b) ? a : b; }
 
+// Exercício 04
+
+int minStops(int d[], int n, int m) {
+    int numStops = 0, currentPos = 0, lastStop = 0, i;
+
+    while (currentPos < n - 1) {
+        lastStop = currentPos;
+
+        // Procura pelo posto mais distante dentro do alcance
+        while (currentPos < n - 1 && d[currentPos + 1] - d[lastStop] <= m) {
+            currentPos++;
+        }
+
+        // Se não foi possível avançar, não é possível completar a viagem
+        if (currentPos == lastStop) {
+            return -1;
+        }
+
+        // Se ainda não estamos no destino, conta mais uma parada
+        if (currentPos < n - 1) {
+            numStops++;
+        }
+    }
+
+    return numStops;
+}
+
 // Exercício 05
 
 typedef struct {
@@ -548,6 +575,20 @@ int cutRodTopDown (int precos[], int n, int memo[])
 
 int main ()
 {
+    printf("=====================04=====================\n");
+
+    int m_04 = 200; // Distância máxima que o carro pode percorrer com um tanque
+    int d_04[] = {0, 100, 200, 300, 400, 500, 600}; // Distâncias dos postos de combustível
+    int n_04 = sizeof(d_04) / sizeof(d_04[0]); // Número de postos
+
+    int result = minStops(d_04, n_04, m_04);
+
+    if (result >= 0) {
+        printf("Número mínimo de paradas: %d\n", result);
+    } else {
+        printf("Não é possível completar a viagem com as paradas disponíveis.\n");
+    }
+
     printf("=====================05=====================\n");
 
     Item arr_05[] = {{120, 10}, {100, 20}, {60, 30}};
