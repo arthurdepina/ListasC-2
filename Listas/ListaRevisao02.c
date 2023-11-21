@@ -14,17 +14,55 @@
 #include <math.h>
 #include <limits.h>
 
+#define MAX 100
+
 /* 
 *                 Os exercícios 1 - 10 estão no Github e Replit disponibilizados acima.
 *                          replit.com/@arthurdepina/ListaRevisao02#main.c              
 */
 
-//                         Funções comuns para todos os exercícios
-
-#define MAX 100
 int max(int a, int b) { return (a > b) ? a : b; }
 
-                    // Fim das funções comuns para todos os exercícios
+// Exercício 06
+
+typedef struct {
+    int calorias;
+    int proteinas;
+} Alimento;
+
+void calcularDieta(int K, Alimento alimentos[], int n) {
+    int i, j;
+    // Criar e inicializar a matriz de programação dinâmica
+    int **dp = (int **)malloc((n + 1) * sizeof(int *));
+    for (i = 0; i <= n; i++) {
+        dp[i] = (int *)malloc((K + 1) * sizeof(int));
+        for (j = 0; j <= K; j++) {
+            dp[i][j] = 0;
+        }
+    }
+
+    // Preencher a matriz dp
+    for (i = 1; i <= n; i++) {
+        for (j = 0; j <= K; j++) {
+            if (alimentos[i - 1].calorias <= j) {
+                dp[i][j] = dp[i - 1][j] > dp[i - 1][j - alimentos[i - 1].calorias] + alimentos[i - 1].proteinas
+                           ? dp[i - 1][j]
+                           : dp[i - 1][j - alimentos[i - 1].calorias] + alimentos[i - 1].proteinas;
+            } else {
+                dp[i][j] = dp[i - 1][j];
+            }
+        }
+    }
+
+    // Exibir o resultado
+    printf("Quantidade máxima de proteínas: %d\n", dp[n][K]);
+
+    // Liberar a memória
+    for (i = 0; i <= n; i++) {
+        free(dp[i]);
+    }
+    free(dp);
+}
 
 // Exercício 07
 
@@ -477,6 +515,22 @@ int cutRodTopDown (int precos[], int n, int memo[])
 
 int main ()
 {
+    printf("=====================06=====================\n");
+
+    int K_06, n_06, i_06;
+
+    K_06 = 500;
+    n_06 = 4;
+
+    Alimento alimentos[4] = {
+        {100, 20},
+        {200, 40},
+        {150, 30},
+        {50, 10}
+    };
+
+    calcularDieta(K_06, alimentos, n_06);
+
     printf("=====================07=====================\n");
 
     Atividade atividades[] = {{5, 9}, {1, 2}, {3, 4}, {0, 6}, {5, 7}, {8, 9}};
