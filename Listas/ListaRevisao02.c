@@ -26,6 +26,36 @@ int max(int a, int b) { return (a > b) ? a : b; }
 
                     // Fim das funções comuns para todos os exercícios
 
+// Exercício 09
+
+int minQuadrados(int n) {
+    // Se n for 0, não precisamos de nenhum número
+    if (n <= 0) {
+        return 0;
+    }
+
+    // Cria um vetor para armazenar o mínimo de quadrados para cada número até n
+    int dp[n + 1];
+
+    // Inicializa o vetor com o máximo valor possível
+    for (int i = 0; i <= n; i++) {
+        dp[i] = INT_MAX;
+    }
+
+    // Base case: 0 pode ser representado por 0 quadrados
+    dp[0] = 0;
+
+    // Preenche o vetor com a quantidade mínima de quadrados para cada número até n
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j * j <= i; j++) {
+            dp[i] = (dp[i] > dp[i - j * j] + 1) ? dp[i - j * j] + 1 : dp[i];
+        }
+    }
+
+    // Retorna a quantidade mínima de quadrados para n
+    return dp[n];
+}
+
 // Exercício 10
 
                     // Subsequencia crescente mais longa - recursiva
@@ -391,6 +421,11 @@ int cutRodTopDown (int precos[], int n, int memo[])
 
 int main ()
 {
+    printf("=====================09=====================\n");
+
+    int n_09 = 12;
+    printf("Menor quantidade de números quadrados perfeitos que somam %d: %d\n", n_09, minQuadrados(n_09));
+
     printf("=====================10=====================\n");
 
     int arr_10[] = {10, 22, 9, 33, 21, 50, 41, 60, 80};
