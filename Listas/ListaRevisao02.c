@@ -13,7 +13,72 @@
 #include <math.h>
 #include <limits.h>
 
+                        // Funções comuns para todos os exercícios
+
 int max(int a, int b) { return (a > b) ? a : b; }
+
+                    // Fim das funções comuns para todos os exercícios
+
+// Exercício 11
+
+                    // Versão backtracking
+int minCoinsRec(int coins[], int n, int V) {
+    if (V == 0) return 0;
+
+    int res = INT_MAX;
+
+    for (int i = 0; i < n; i++) {
+        if (coins[i] <= V) {
+            int sub_res = minCoinsRec(coins, n, V - coins[i]);
+
+            if (sub_res != INT_MAX && sub_res + 1 < res)
+                res = sub_res + 1;
+        }
+    }
+    return res;
+}
+
+                    // Versão top-down
+int minCoinsTopDown(int coins[], int n, int V, int dp[]) {
+    if (V == 0) return 0;
+
+    if (dp[V] != -1) return dp[V];
+
+    int res = INT_MAX;
+
+    for (int i = 0; i < n; i++) {
+        if (coins[i] <= V) {
+            int sub_res = minCoinsTopDown(coins, n, V - coins[i], dp);
+
+            if (sub_res != INT_MAX && sub_res + 1 < res)
+                res = sub_res + 1;
+        }
+    }
+
+    dp[V] = res;
+    return res;
+}
+
+                    // Versão bottom-up
+int minCoinsBottomUp(int coins[], int n, int V) {
+    int dp[V+1];
+
+    dp[0] = 0;
+
+    for (int i = 1; i <= V; i++)
+        dp[i] = INT_MAX;
+
+    for (int i = 1; i <= V; i++) {
+        for (int j = 0; j < n; j++)
+            if (coins[j] <= i) {
+                int sub_res = dp[i - coins[j]];
+                if (sub_res != INT_MAX && sub_res + 1 < dp[i])
+                    dp[i] = sub_res + 1;
+            }
+    }
+
+    return dp[V];
+}
 
 // Exercício 12
 
@@ -257,6 +322,17 @@ int cutRodTopDown (int precos[], int n, int memo[])
 
 int main ()
 {
+    printf("=====================11=====================\n");
+
+    int coins[] = {1, 5, 10, 25};  // Exemplo de conjunto de moedas
+    int m_11 = sizeof(coins) / sizeof(coins[0]);
+    int V = 30;  // Exemplo de valor do troco
+    int dp[V+1];
+    printf("Mínimo de moedas necessárias: %d\n", minCoinsRec(coins, m_11, V));
+    memset(dp, -1, sizeof(dp));
+    printf("Mínimo de moedas necessárias: %d\n", minCoinsTopDown(coins, m_11, V, dp));
+    printf("Mínimo de moedas necessárias: %d\n", minCoinsBottomUp(coins, m_11, V));
+
     printf("=====================12=====================\n");
 
     // Definindo os valores e pesos dos itens
