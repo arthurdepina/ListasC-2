@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void exibir_vetor(int *v, int len)
+void exibir_vetor (int *v, int len)
 {
 	for (int i = 0; i < len; i++){
 		if (i == 0) printf("[");
@@ -10,7 +10,7 @@ void exibir_vetor(int *v, int len)
 	}
 }
 
-void exibir_matriz(int **matriz, int n_linhas, int n_colunas)
+void exibir_matriz (int **matriz, int n_linhas, int n_colunas)
 {
     int i, j;
     for (i = 0; i < n_linhas; i++){
@@ -20,7 +20,7 @@ void exibir_matriz(int **matriz, int n_linhas, int n_colunas)
     }
 }
 
-int **alocar_matriz(int n_linhas, int n_colunas)
+int **alocar_matriz (int n_linhas, int n_colunas)
 {
     int **matriz;
     matriz = (int**) calloc(n_linhas, sizeof(int*));
@@ -30,7 +30,7 @@ int **alocar_matriz(int n_linhas, int n_colunas)
     return matriz;
 }
 
-int converter_p_binario(int n)
+int converter_p_binario (int n)
 {
     int resto;
     int multi = 1;
@@ -45,7 +45,7 @@ int converter_p_binario(int n)
     return bin;
 }
 
-int soma_vetor(int *vetor, int len)
+int soma_vetor (int *vetor, int len)
 {
     int soma = 0;
     for (int i = 0; i < len; i++) {
@@ -54,7 +54,7 @@ int soma_vetor(int *vetor, int len)
     return soma;
 }
 
-void troca(int *a, int *b)
+void troca (int *a, int *b)
 {
 	int temp = *a;
 	*a = *b;
@@ -65,7 +65,8 @@ void troca(int *a, int *b)
             Apenas para referenciar
 */
 
-int * teste_retorna_array(int *s, int len_s){
+int * teste_retorna_array(int *s, int len_s)
+{
     s[len_s - 1] = 8888;
 	return s;
 }

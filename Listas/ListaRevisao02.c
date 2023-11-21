@@ -11,6 +11,91 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#include <limits.h>
+
+// Exercício 13
+
+int m[100][100];
+int s[100][100];
+
+void matrix_chain_order(int p[], int n) {
+    int i, j, k, L, q;
+
+    for (i = 1; i < n; i++) {
+        m[i][i] = 0;
+    }
+
+    for (L = 2; L < n; L++) {
+        for (i = 1; i < n - L + 1; i++) {
+            j = i + L - 1;
+            m[i][j] = INT_MAX;
+            for (k = i; k <= j - 1; k++) {
+                q = m[i][k] + m[k + 1][j] + p[i - 1] * p[k] * p[j];
+                if (q < m[i][j]) {
+                    m[i][j] = q;
+                    s[i][j] = k;
+                }
+            }
+        }
+    }
+}
+
+void print_optimal_parens(int i, int j) {
+    if (i == j)
+        printf("A%d", i);
+    else {
+        printf("(");
+        print_optimal_parens(i, s[i][j]);
+        print_optimal_parens(s[i][j] + 1, j);
+        printf(")");
+    }
+}
+
+int MatrixChainOrderRecursive(int p[], int i, int j) {
+    if (i == j)
+        return 0;
+
+    int k;
+    int min = INT_MAX;
+    int count;
+
+    // Coloca parênteses em diferentes lugares entre as matrizes,
+    // recursivamente e verifica o número mínimo de multiplicações
+    for (k = i; k < j; k++) {
+        count = MatrixChainOrderRecursive(p, i, k) +
+                MatrixChainOrderRecursive(p, k + 1, j) +
+                p[i - 1] * p[k] * p[j];
+
+        if (count < min)
+            min = count;
+    }
+
+    return min;
+}
+
+// Função auxiliar para inicializar a matriz de memorização
+void initialize() {
+    memset(m, -1, sizeof(m));
+}
+
+// Função de programação dinâmica top-down para calcular o número mínimo de multiplicações
+int MatrixChainOrderTopDown(int p[], int i, int j) {
+    if (i == j)
+        return 0;
+
+    if (m[i][j] != -1)
+        return m[i][j];
+
+    m[i][j] = INT_MAX;
+    for (int k = i; k < j; k++) {
+        m[i][j] = fmin(m[i][j],
+                       MatrixChainOrderTopDown(p, i, k) +
+                       MatrixChainOrderTopDown(p, k + 1, j) +
+                       p[i - 1] * p[k] * p[j]);
+    }
+
+    return m[i][j];
+}
 
 // Exercício 14
 
@@ -102,6 +187,27 @@ int cutRodTopDown(int precos[], int n, int memo[]) {
 
 int main ()
 {
+    printf("=====================13=====================\n");
+
+    int p[] = {200, 2, 30, 20, 5};
+    int n = sizeof(p)/sizeof(p[0]);
+
+    matrix_chain_order(p, n);
+    printf("Número mínimo de operações: %d\n", m[1][n - 1]);
+    printf("Parentização ótima: ");
+    print_optimal_parens(1, n - 1); printf("\n");
+
+    int arr[] = {200, 2, 30, 20, 5};
+    printf("Número mínimo de operações: %d\n",
+           MatrixChainOrderRecursive(arr, 1, n - 1));
+    printf("Parentização ótima: ");
+    print_optimal_parens(1, n - 1); printf("\n");
+
+    printf("Número mínimo de operações: %d\n",
+           MatrixChainOrderTopDown(arr, 1, n - 1));
+    printf("Parentização ótima: ");
+    print_optimal_parens(1, n - 1); printf("\n");
+
     printf("=====================14=====================\n");
 
     char X[] = "ATCTGAT";
@@ -123,7 +229,7 @@ int main ()
     printf("Receita máxima: %d\n", cutRodRecursiva(precos, tamanho));
     printf("Receita máxima: %d\n", cutRodTopDown(precos, tamanho, memo));
     printf("Receita máxima: %d\n", cutRodBottomUp(precos, tamanho));
-    
+
     printf("============================================\n");
 
     return 0;
