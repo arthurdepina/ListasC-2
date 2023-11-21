@@ -23,6 +23,30 @@
 
 int max(int a, int b) { return (a > b) ? a : b; }
 
+// Exercício 03
+
+int compare(const void *a, const void *b) {
+    return (*(int *)a - *(int *)b);
+}
+
+int find_max_files_to_copy(int sizes[], int n, int c) {
+    qsort(sizes, n, sizeof(int), compare);
+    
+    int count = 0;
+    int total_size = 0;
+    
+    for (int i = 0; i < n; i++) {
+        if (total_size + sizes[i] <= c) {
+            total_size += sizes[i];
+            count++;
+        } else {
+            break;
+        }
+    }
+    
+    return count;
+}
+
 // Exercício 04
 
 int minStops(int d[], int n, int m) {
@@ -575,6 +599,19 @@ int cutRodTopDown (int precos[], int n, int memo[])
 
 int main ()
 {
+    printf("=====================02=====================\n");
+
+
+
+    printf("=====================03=====================\n");
+
+    int files_sizes[] = {4, 2, 3, 1, 5};
+    int n_03 = sizeof(files_sizes)/sizeof(files_sizes[0]);
+    int pendrive_capacity = 10;
+    
+    int max_files = find_max_files_to_copy(files_sizes, n_03, pendrive_capacity);
+    printf("Max: %d\n", max_files);
+
     printf("=====================04=====================\n");
 
     int m_04 = 200; // Distância máxima que o carro pode percorrer com um tanque
