@@ -26,6 +26,38 @@ int max(int a, int b) { return (a > b) ? a : b; }
 
                     // Fim das funções comuns para todos os exercícios
 
+// Exercício 07
+
+typedef struct {
+    int inicio;
+    int fim;
+} Atividade;
+
+int comparaAtividades(const void *a, const void *b) {
+    Atividade *atividadeA = (Atividade *)a;
+    Atividade *atividadeB = (Atividade *)b;
+    return atividadeA->fim - atividadeB->fim;
+}
+
+void seleciona_atividades_guloso(Atividade atividades[], int n) {
+    // Ordena as atividades por tempo de término
+    qsort(atividades, n, sizeof(Atividade), comparaAtividades);
+
+    printf("Atividades selecionadas: \n");
+
+    // A primeira atividade sempre é selecionada
+    int i = 0;
+    printf("(%d, %d)\n", atividades[i].inicio, atividades[i].fim);
+
+    // Percorre as atividades restantes
+    for (int j = 1; j < n; j++) {
+        if (atividades[j].inicio >= atividades[i].fim) {
+            printf("(%d, %d)\n", atividades[j].inicio, atividades[j].fim);
+            i = j;
+        }
+    }
+}
+
 // Exercício 08
 
 int countWays(int n) {
@@ -445,6 +477,12 @@ int cutRodTopDown (int precos[], int n, int memo[])
 
 int main ()
 {
+    printf("=====================07=====================\n");
+
+    Atividade atividades[] = {{5, 9}, {1, 2}, {3, 4}, {0, 6}, {5, 7}, {8, 9}};
+    int n_07 = sizeof(atividades) / sizeof(atividades[0]);
+    seleciona_atividades_guloso(atividades, n_07);
+
     printf("=====================08=====================\n");
 
     int n_08 = 2;
