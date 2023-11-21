@@ -1,19 +1,20 @@
 /*
- *          Lista de Exercício do Segundo Bimestre
+ *                 Lista de Exercícios do 2o Bimestre
  *
- *         Arthur de Pina Balduino Leitão  32207840
- *         João Victor Dallapé Madeira     32209592           
- *
- * github.com/arthurdepina/ListasC-2/Listas/ListaRevisao02.c    
+ *              Arthur de Pina Balduino Leitão  32207840
+ *              João Victor Dallapé Madeira     32209592           
+ *                                          
+ * github.com/arthurdepina/ListasC-2/blob/main/Listas/ListaRevisao02.c   
 */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 
+// Exercício 14
 
 
-// Exercícios 15
+// Exercício 15
 
 int max(int a, int b) { return (a > b) ? a : b; }
 
@@ -59,6 +60,16 @@ int cutRodTopDown(int precos[], int n, int memo[]) {
 
 int main ()
 {
+    int precos[] = {1, 5, 8, 9, 10, 17, 17, 20};
+    int tamanho = sizeof(precos)/sizeof(precos[0]);
+    int memo[tamanho + 1];
+
+    for (int i = 0; i <= tamanho; i++)
+        memo[i] = -1;
+
+    printf("Receita máxima: %d\n", cutRodRecursiva(precos, tamanho));
+    printf("Receita máxima: %d\n", cutRodTopDown(precos, tamanho, memo));
+    printf("Receita máxima: %d\n", cutRodBottomUp(precos, tamanho));
 
     return 0;
 }
