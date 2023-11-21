@@ -23,6 +23,39 @@
 
 int max(int a, int b) { return (a > b) ? a : b; }
 
+// Exercício 05
+
+typedef struct {
+    int value;
+    int weight;
+} Item;
+
+int cmp(const void *a, const void *b) {
+    double r1 = (double)((Item *)a)->value / ((Item *)a)->weight;
+    double r2 = (double)((Item *)b)->value / ((Item *)b)->weight;
+    return r1 < r2 ? 1 : -1;
+}
+
+double fractionalKnapsack(int W, Item arr[], int n) {
+    qsort(arr, n, sizeof(Item), cmp);
+    
+    int curWeight = 0;
+    double finalvalue = 0.0;
+    
+    for (int i = 0; i < n; i++) {
+        if (curWeight + arr[i].weight <= W) {
+            curWeight += arr[i].weight;
+            finalvalue += arr[i].value;
+        } else {
+            int remain = W - curWeight;
+            finalvalue += arr[i].value * ((double)remain / arr[i].weight);
+            break;
+        }
+    }
+    
+    return finalvalue;
+}
+
 // Exercício 06
 
 typedef struct {
@@ -515,6 +548,18 @@ int cutRodTopDown (int precos[], int n, int memo[])
 
 int main ()
 {
+    printf("=====================05=====================\n");
+
+    Item arr_05[] = {{120, 10}, {100, 20}, {60, 30}};
+    
+    // Knapsack capacity
+    int W_05 = 50;
+    int n_05 = sizeof(arr_05) / sizeof(arr_05[0]);
+    
+    // Function call
+    printf("Max = %.2f\n", 
+                        fractionalKnapsack(W_05, arr_05, n_05));
+
     printf("=====================06=====================\n");
 
     int K_06, n_06, i_06;
@@ -523,17 +568,24 @@ int main ()
     n_06 = 4;
 
     Alimento alimentos[4] = {
-        {100, 20},
-        {200, 40},
-        {150, 30},
-        {50, 10}
+                             {100, 20},
+                             {200, 40},
+                             {150, 30},
+                             {50, 10}
     };
 
     calcularDieta(K_06, alimentos, n_06);
 
     printf("=====================07=====================\n");
 
-    Atividade atividades[] = {{5, 9}, {1, 2}, {3, 4}, {0, 6}, {5, 7}, {8, 9}};
+    Atividade atividades[] = {
+                              {5, 9}, 
+                              {1, 2}, 
+                              {3, 4}, 
+                              {0, 6}, 
+                              {5, 7}, 
+                              {8, 9}
+    };
     int n_07 = sizeof(atividades) / sizeof(atividades[0]);
     seleciona_atividades_guloso(atividades, n_07);
 
