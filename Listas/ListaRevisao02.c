@@ -23,6 +23,48 @@
 
 int max(int a, int b) { return (a > b) ? a : b; }
 
+// Exercício 01
+
+void calcularNotas(double *valor, int notas[], int tamanho) {
+    int quantidade, i;
+    printf("NOTAS:\n");
+    for(i = 0; i < tamanho; i++) {
+        quantidade = *valor / notas[i];
+        printf("%d nota(s) de R$ %d.00\n", quantidade, notas[i]);
+        *valor -= quantidade * notas[i];
+    }
+}
+
+void calcularMoedas(double *valor, double moedas[], int tamanho) {
+    int quantidade, i;
+    printf("MOEDAS:\n");
+    for(i = 0; i < tamanho; i++) {
+        quantidade = *valor / moedas[i];
+        printf("%d moeda(s) de R$ %.2f\n", quantidade, moedas[i]);
+        *valor -= quantidade * moedas[i];
+    }
+}
+
+// Exercício 02
+
+void calcularSelos(int taxa, int *selosDe5, int *selosDe3) {
+    *selosDe5 = taxa / 5;
+    int restante = taxa % 5;
+
+    while (*selosDe5 >= 0) {
+        if (restante % 3 == 0) {
+            *selosDe3 = restante / 3;
+            return;
+        }
+        (*selosDe5)--;
+        restante += 5;
+    }
+
+    // Não é possível pagar a taxa com os selos disponíveis
+    *selosDe5 = -1;
+    *selosDe3 = -1;
+}
+
 // Exercício 03
 
 int compare(const void *a, const void *b) {
@@ -599,9 +641,22 @@ int cutRodTopDown (int precos[], int n, int memo[])
 
 int main ()
 {
+    printf("=====================01=====================\n");
+
+    double valor = 576.73;
+    int notas[] = {100, 50, 20, 10, 5, 2};
+    double moedas[] = {1.00, 0.50, 0.25, 0.10, 0.05, 0.01};
+
+    calcularNotas(&valor, notas, sizeof(notas)/sizeof(notas[0]));
+    calcularMoedas(&valor, moedas, sizeof(moedas)/sizeof(moedas[0]));
+
     printf("=====================02=====================\n");
 
-
+    int taxa = 16;
+    int selosDe5, selosDe3;
+    calcularSelos(taxa, &selosDe5, &selosDe3);
+    printf("Número de selos de 5 centavos: %d\n", selosDe5);
+    printf("Número de selos de 3 centavos: %d\n", selosDe3);
 
     printf("=====================03=====================\n");
 
