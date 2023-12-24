@@ -14,7 +14,7 @@ void mostrar_tabuleiro(int **m, int linhas, int colunas){
 
 int alocando_sudoku(int **tabuleiro, int linhas, int colunas){
     FILE *tab;
-    tab = fopen("l05_sudoku.txt", "r");
+    tab = fopen("e05_sudoku.txt", "r");
     if (tab == NULL){
         printf("Erro na abertura do arquivo");
         return 1;
